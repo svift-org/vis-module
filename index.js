@@ -9,6 +9,8 @@ SVIFT.vis.base = (function (data, root) {
  
   var module = {};
 
+  var hello = 'world';
+
   module.config = {
     root:root,
     data:data,
@@ -23,6 +25,7 @@ SVIFT.vis.base = (function (data, root) {
   };
 
   module.init = function () {
+    console.log(hello, module.config);
     module.config.root.append('svg')
       .style('width','100%')
       .style('height','100%')
