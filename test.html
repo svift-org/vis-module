@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript">
+
+//Master namespace
+var SVIFT = {};
+
+SVIFT.vis = (function() {
+   // Module object
+  var module = {};
+ 
+  module.method = function () {
+    console.log( "hello vis" );
+  };
+
+  module.method1 = function () {
+    console.log( "hello vis" );
+  };
+ 
+  return module;
+});
+
+SVIFT.visBarchart = (function() {
+   // Module object
+  var module = SVIFT.vis();
+ 
+  module.method = function () {
+    console.log( "hello barchart" );
+  };
+ 
+  return module;
+});
+</script>
+</body>
+</html>
