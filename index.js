@@ -10,6 +10,8 @@ SVIFT.vis.base = (function (data, root) {
   var module = {};
 
   module.config = {
+    root:root,
+    data:data,
     maxWidth : 4096,
     maxHeight : 4096,
     margin : {
@@ -21,7 +23,7 @@ SVIFT.vis.base = (function (data, root) {
   };
 
   module.init = function () {
-    root.append('svg')
+    module.config.root.append('svg')
       .style('width','100%')
       .style('height','100%')
       .attr('width', '100%')
