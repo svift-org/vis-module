@@ -5,8 +5,8 @@
 */
 
 SVIFT.vis = {};
-SVIFT.vis.base = (function (data, root) {
-  console.log(data, root)
+SVIFT.vis.base = (function (data1, data2) {
+  console.log(data1, data2)
  
   var module = {};
 
