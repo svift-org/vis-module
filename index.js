@@ -27,7 +27,7 @@ SVIFT.vis.base = (function (data, container) {
   };
 
   module.init = function () {
-    module.svg = root.append('svg')
+    module.svg = module.container.append('svg')
       .attr('width', '100%')
       .attr('height', '100%');
 
