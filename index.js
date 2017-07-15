@@ -31,6 +31,7 @@ SVIFT.vis.base = (function (data, root) {
         .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
 
     module.setup();
+    module.resize();
 
     d3.select(window).on('resize', SVIFT.helper.debouncer(function(e){
       module.resize();
