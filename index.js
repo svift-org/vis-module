@@ -9,6 +9,8 @@ SVIFT.vis.base = (function (data, root) {
 
   var module = {};
 
+  module.data = data;
+  module.root = root;
   module.svg = null;
 
   module.config = {
