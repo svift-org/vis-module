@@ -5,12 +5,13 @@
 */
 
 SVIFT.vis = {};
-SVIFT.vis.base = (function (data, root) {
+SVIFT.vis.base = (function (data, container) {
 
   var module = {};
 
   module.data = data;
-  module.root = root;
+  module.container = container;
+  module.g = null;
   module.svg = null;
 
   module.config = {
@@ -28,9 +29,10 @@ SVIFT.vis.base = (function (data, root) {
   module.init = function () {
     module.svg = root.append('svg')
       .attr('width', '100%')
-      .attr('height', '100%')
-      .append('g')
-        .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
+      .attr('height', '100%');
+
+    module.g = module.svg.append('g')
+      .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
 
     module.setup();
     module.resize();
