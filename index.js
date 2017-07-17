@@ -46,8 +46,14 @@ SVIFT.vis.base = (function (data, container) {
       }
     }
 
+    module.time.step = module.playTime / (module.playTime/1000*module.time.fps);
+
     module.setup();
     module.resize();
+
+    if (typeof window.callPhantom === 'function') {
+      window.callPhantom({ msg: 'setupDone' });
+    }
 
     d3.select(window).on('resize', SVIFT.helper.debouncer(function(e){
       module.resize();
@@ -66,6 +72,9 @@ SVIFT.vis.base = (function (data, container) {
       var tl = module.timeline[key];
       if(tl.start <= t && tl.end >= t){
         tl.func((t-tl.start)/(tl.end-tl.start));
+      }else if(t > tl.end){
+        //Making sure it sits on its end position, also for the goto function
+        tl.func(1);
       }
     }
   };
@@ -74,6 +83,8 @@ SVIFT.vis.base = (function (data, container) {
   module.playState = false;
   module.playTime = 0;
   module.time = {
+    fps : 30,
+    step: 0,
     elapsed : 0,
     fpsInterval : 1000 / 30, //30 fps
     then : 0,
@@ -83,7 +94,21 @@ SVIFT.vis.base = (function (data, container) {
 
   module.play = function () {
     if(module.playState){
-      if (typeof window !== 'undefined') {
+      if (typeof window.callPhantom === 'function') {
+        //Node.JS rendering
+        module.playHead += module.step;
+        if(module.playHead <= module.playTime){
+          module.draw(module.playHead);
+          //Node.js calls the play method again after rendering is done
+          window.callPhantom({ msg: 'drawDone' });
+        }else{
+          //Draw one last frame to make sure no rounding error messed things up
+          module.draw(module.playHead);
+          //Let node.js know we are done.
+          module.playState = false;
+          window.callPhantom({ msg: 'playDone' });
+        }
+      }else{
         //Standard Web Implementation
         if(module.time.then === 0){
           module.time.then = module.time.startTime = Date.now();
@@ -102,14 +127,6 @@ SVIFT.vis.base = (function (data, container) {
         }else{
           module.pause();
         }     
-      }else{
-        //Node.JS rendering
-        module.playHead++;
-        if(module.playHead<=module.playTime){
-          module.draw(module.playHead);
-          //Node.js calls the play method again after rendering is done
-          //setTimeout(module.play, 0);
-        }
       }
     }
   };
