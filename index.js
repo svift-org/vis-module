@@ -82,32 +82,34 @@ SVIFT.vis.base = (function (data, container) {
   };
 
   module.play = function () {
-    if(module.time.then === 0){
-      module.time.then = module.time.startTime = Date.now();
-    }
-
     if(module.playState){
-      module.playHead++;
-      if(module.playHead<=module.playTime){
-        if (typeof window !== 'undefined') {
-          //Standard Web Implementation
-          window.requestAnimationFrame(module.play);
+      if (typeof window !== 'undefined') {
+        //Standard Web Implementation
+        if(module.time.then === 0){
+          module.time.then = module.time.startTime = Date.now();
+        }
 
-          module.time.now = Date.now();
-          module.time.elapsed = module.time.now - module.time.then;
+        module.time.now = Date.now();
+        module.time.elapsed = module.time.now - module.time.then;
+
+        if((module.time.now - module.time.startTime) <= module.playTime){
+          window.requestAnimationFrame(module.play);
 
           if (module.time.elapsed > module.time.fpsInterval) {
             module.time.then = module.time.now - (module.time.elapsed % module.time.fpsInterval);
-            module.draw(module.playHead);
+            module.draw((module.time.now - module.time.startTime));
           }
         }else{
-          //Node.JS rendering
-          module.draw(module.playHead);
-          setTimeout(module.play, 0);
-        }
-
+          module.pause();
+        }     
       }else{
-        module.pause();
+        //Node.JS rendering
+        module.playHead++;
+        if(module.playHead<=module.playTime){
+          module.draw(module.playHead);
+          //Node.js calls the play method again after rendering is done
+          //setTimeout(module.play, 0);
+        }
       }
     }
   };
