@@ -52,7 +52,6 @@ SVIFT.vis.base = (function (data, container) {
     module.resize();
 
     if (typeof window.callPhantom === 'function') {
-      window.callPhantom({ msg: 'step:'+module.time.step+" "+module.playTime });
       window.callPhantom({ msg: 'setupDone' });
     }
 
@@ -97,7 +96,7 @@ SVIFT.vis.base = (function (data, container) {
     if(module.playState){
       if (typeof window.callPhantom === 'function') {
         //Node.JS rendering
-        module.playHead += module.step;
+        module.playHead += module.time.step;
         if(module.playHead <= module.playTime){
           module.draw(module.playHead);
           //Node.js calls the play method again after rendering is done
