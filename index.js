@@ -52,7 +52,7 @@ SVIFT.vis.base = (function (data, container) {
     module.resize();
 
     if (typeof window.callPhantom === 'function') {
-      window.callPhantom({ msg: 'step:'+module.time.step });
+      window.callPhantom({ msg: 'step:'+module.time.step+" "+module.playTime });
       window.callPhantom({ msg: 'setupDone' });
     }
 
