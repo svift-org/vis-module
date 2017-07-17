@@ -48,12 +48,11 @@ SVIFT.vis.base = (function (data, container) {
 
     module.time.step = module.playTime / (module.playTime/1000*module.time.fps);
 
-    console.log(module.time.step);
-
     module.setup();
     module.resize();
 
     if (typeof window.callPhantom === 'function') {
+      window.callPhantom({ msg: 'step:'+module.time.step });
       window.callPhantom({ msg: 'setupDone' });
     }
 
