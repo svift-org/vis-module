@@ -26,10 +26,10 @@ SVIFT.vis.base = (function (data, container) {
     }
   };
 
-  module.timeline = [
+  module.timeline = {
     //Start and End are in Milliseconds, func receives a value between 0 and 1, obj is a container to store related info e.g. easing, etc.
     //rect:{start:0, end:3000, func:module.drawRect, obj:{}}
-  ];
+  };
 
   module.init = function () {
     module.svg = module.container.append('svg')
