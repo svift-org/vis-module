@@ -64,7 +64,7 @@ SVIFT.vis.base = (function (data, container) {
   module.draw = function (t) {
     for( var key in module.timeline ){
       var tl = module.timeline[key];
-      if(tl.start >= t && tl.end <= t){
+      if(tl.start <= t && tl.end >= t){
         tl.func((t-tl.start)/(tl.end-tl.start));
       }
     }
