@@ -93,6 +93,7 @@ SVIFT.vis.base = (function (data, container) {
   };
 
   module.play = function () {
+    window.callPhantom({ msg: 'play' });
     if(module.playState){
       if (typeof window.callPhantom === 'function') {
         //Node.JS rendering
