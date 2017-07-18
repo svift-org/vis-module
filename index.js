@@ -140,11 +140,12 @@ SVIFT.vis.base = (function (data, container) {
     module.playState = false;
   };
 
-  module.goto = function (t) {
-    module.pause();
+  module.goTo = function (t) {
     if(t<=module.playTime){
-      module.draw(t);
+      module.playHead = t*module.playTime;
+      module.draw(module.playHead);
     }
+    module.pause();
   };
 
   return module;
