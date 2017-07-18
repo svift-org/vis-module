@@ -125,6 +125,8 @@ SVIFT.vis.base = (function (data, container) {
             module.draw((module.time.now - module.time.startTime));
           }
         }else{
+          console.log(module.playHead);
+          module.goTo(1);
           module.pause();
         }     
       }
