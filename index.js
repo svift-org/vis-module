@@ -34,7 +34,9 @@ SVIFT.vis.base = (function (data, container) {
   module.init = function () {
     module.svg = module.container.append('svg')
       .attr('width', '100%')
-      .attr('height', '100%');
+      .attr('height', '100%')
+      //temporary testing for phantom rendering
+      .style('background-color','#ffffff');
 
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
