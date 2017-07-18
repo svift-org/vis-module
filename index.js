@@ -47,6 +47,7 @@ SVIFT.vis.base = (function (data, container) {
     }
 
     module.time.step = module.playTime / (module.playTime/1000*module.time.fps);
+    module.playHead = 0;
 
     module.setup();
     module.resize();
@@ -122,10 +123,10 @@ SVIFT.vis.base = (function (data, container) {
 
           if (module.time.elapsed > module.time.fpsInterval) {
             module.time.then = module.time.now - (module.time.elapsed % module.time.fpsInterval);
-            module.draw((module.time.now - module.time.startTime));
+            module.playHead = (module.time.now - module.time.startTime);
+            module.draw(module.playHead);
           }
         }else{
-          console.log(module.playHead);
           module.goTo(1);
           module.pause();
         }     
