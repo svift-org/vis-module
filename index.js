@@ -127,6 +127,7 @@ SVIFT.vis.base = (function (data, container) {
             module.draw(module.playHead);
           }
         }else{
+          console.log(module.playHead)
           module.goTo(1);
           module.pause();
         }     
