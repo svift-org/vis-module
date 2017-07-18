@@ -93,7 +93,6 @@ SVIFT.vis.base = (function (data, container) {
   };
 
   module.play = function () {
-    window.callPhantom({ msg: 'play' });
     if(module.playState){
       if (typeof window.callPhantom === 'function') {
         //Node.JS rendering
@@ -101,7 +100,7 @@ SVIFT.vis.base = (function (data, container) {
         if(module.playHead <= module.playTime){
           module.draw(module.playHead);
           //Node.js calls the play method again after rendering is done
-          window.callPhantom({ msg: 'drawDone' });
+          window.callPhantom({ msg: 'drawDone', playHead: module.playHead });
         }else{
           //Draw one last frame to make sure no rounding error messed things up
           module.draw(module.playHead);
