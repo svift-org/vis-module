@@ -38,6 +38,7 @@ SVIFT.vis.base = (function (data, container) {
       //temporary testing for phantom rendering
       .style('background-color','#ffffff');
 
+    module.defs = module.svg.append('defs')
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
 
