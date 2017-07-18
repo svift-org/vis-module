@@ -66,6 +66,7 @@ SVIFT.vis.base = (function (data, container) {
 
   module.resize = function () {
     //Resize should consider height and width (e.g. Bootstrap 16-9 resizes height and width of embed elements)
+    //For some weird reason phantom resizes the page before every rendering, pay attention to this problem
   };
 
   module.draw = function (t) {
@@ -104,9 +105,10 @@ SVIFT.vis.base = (function (data, container) {
           window.callPhantom({ msg: 'drawDone', playHead: module.playHead });
         }else{
           //Draw one last frame to make sure no rounding error messed things up
+          module.playHead = module.playTime
           module.draw(module.playHead);
           //Let node.js know we are done.
-          module.playState = false;
+          module.pause();
           window.callPhantom({ msg: 'playDone' });
         }
       }else{
@@ -127,7 +129,7 @@ SVIFT.vis.base = (function (data, container) {
             module.draw(module.playHead);
           }
         }else{
-          console.log(module.playHead)
+          module.playHead = module.playTime
           module.goTo(1);
           module.pause();
         }     
