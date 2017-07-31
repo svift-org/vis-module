@@ -38,7 +38,7 @@ SVIFT.vis.base = (function (data, container) {
       //temporary testing for phantom rendering
       .style('background-color','#ffffff');
 
-    module.defs = module.svg.append('defs')
+    module.defs = module.svg.append('defs');
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
 
@@ -108,7 +108,7 @@ SVIFT.vis.base = (function (data, container) {
           window.callPhantom({ msg: 'drawDone', playHead: module.playHead });
         }else{
           //Draw one last frame to make sure no rounding error messed things up
-          module.playHead = module.playTime
+          module.playHead = module.playTime;
           module.draw(module.playHead);
           //Let node.js know we are done.
           module.pause();
@@ -132,7 +132,7 @@ SVIFT.vis.base = (function (data, container) {
             module.draw(module.playHead);
           }
         }else{
-          module.playHead = module.playTime
+          module.playHead = module.playTime;
           module.goTo(1);
           module.pause();
         }     

@@ -4,7 +4,8 @@
   "description": "Visualisation base",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint index.js"
   },
   "repository": {
     "type": "git",
@@ -12,5 +13,8 @@
   },
   "author": "Sebastian Meier",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/svift/vis-module#readme"
+  "homepage": "https://bitbucket.org/svift/vis-module#readme",
+  "devDependencies": {
+    "jshint": "^2.9.5"
+  }
 }
