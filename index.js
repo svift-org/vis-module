@@ -64,7 +64,16 @@ SVIFT.vis.base = (function (data, container) {
     }, 200));
   };
 
+  //function that processes the data
+  module.process = function () {
+  };
+
+  //initial function for setting things up initially
   module.setup = function () {
+  };
+
+  //all the drawing should be done in here
+  module.update = function () {
   };
 
   module.resize = function () {
