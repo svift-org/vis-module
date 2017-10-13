@@ -42,6 +42,11 @@ SVIFT.vis.base = (function (data, container) {
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
 
+    module.playHead = 0;
+
+    module.setup();
+    module.resize();
+
     for( var key in module.timeline ){
       var tl = module.timeline[key];
       if(module.playTime < tl.end){
@@ -50,10 +55,6 @@ SVIFT.vis.base = (function (data, container) {
     }
 
     module.time.step = module.playTime / (module.playTime/1000*module.time.fps);
-    module.playHead = 0;
-
-    module.setup();
-    module.resize();
 
     if (typeof window.callPhantom === 'function') {
       window.callPhantom({ msg: 'setupDone' });
