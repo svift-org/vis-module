@@ -9,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/svift/vis-module.git"
+    "url": "git+https://git@github.com/svift-org/vis-module.git"
   },
   "author": "Sebastian Meier",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/svift/vis-module#readme",
+  "homepage": "https://github.com/svift-org/vis-module#readme",
   "devDependencies": {
     "jshint": "^2.9.5"
   }
