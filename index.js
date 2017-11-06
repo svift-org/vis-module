@@ -53,7 +53,7 @@ SVIFT.vis.base = (function (data, container) {
     module.svg = module.container.append('svg')
       .attr('width', '100%')
       .attr('height', '100%')
-      .attr('font-size', fontSize) //font size match function goeas here
+      .attr('font-size', fontSize)
       //temporary testing for phantom rendering
       .style('background-color','#ffffff');
 
@@ -63,39 +63,39 @@ SVIFT.vis.base = (function (data, container) {
 
 
     //Text Top
-    module.d3config.topTextWrapper = module.g.append("g")
+    module.config.topTextWrapper = module.g.append("g")
       .attr("text-anchor", "middle")
       .attr("class", "title-wrapper" )
       .attr("font-family", data.style.font)
 
-    module.d3config.titleMain = module.d3config.topTextWrapper.append("text")
+    module.config.titleMain = module.config.topTextWrapper.append("text")
       .text(data.data.title)
       .attr("font-size", "1.7em")
       .attr("fill", data.style.color.main)
 
-    module.d3config.titleSub = module.d3config.topTextWrapper.append("text")
+    module.config.titleSub = module.config.topTextWrapper.append("text")
       .text(data.data.subTitle)
       .attr("font-size", "1em")
       .attr("fill", data.style.color.second)
 
     //Text Bottom
-    module.d3config.bottomTextWrapper = module.g.append("g")
+    module.config.bottomTextWrapper = module.g.append("g")
       .attr("font-family", data.style.font)
 
-    module.d3config.attribution = module.d3config.bottomTextWrapper
+    module.config.attribution = module.config.bottomTextWrapper
       .append("text")
       .text(data.data.attribution)
       .attr("font-size", module.config.font.default)
       .attr("fill", data.style.color.second)
 
-    module.d3config.source = module.d3config.bottomTextWrapper
+    module.config.source = module.config.bottomTextWrapper
       .append("text")
       .text(data.data.source)
       .attr("font-size", module.config.font.default)
       .attr("fill", data.style.color.second)
 
     //Make a Viz Container
-    module.d3config.vizContainer = module.g
+    module.config.vizContainer = module.g
       .append("g")
       .attr("class", "viz-container")
 
@@ -153,20 +153,20 @@ SVIFT.vis.base = (function (data, container) {
     var vizHeight= module.container.node().offsetHeight - module.config.margin.top - module.config.margin.bottom;
     var vizCenter = vizWidth/2;
 
-    module.d3config.titleMain
+    module.config.titleMain
       .attr("x", vizCenter)
       .attr("y", function(){
-        module.d3config.titleMainHeight = this.getBBox().height
-        return module.d3config.titleMainHeight
+        module.config.titleMainHeight = this.getBBox().height
+        return module.config.titleMainHeight
       })
 
-    module.d3config.titleSub
+    module.config.titleSub
       .attr("x", vizCenter)
       .attr("y", function(){
-        return (module.d3config.titleMainHeight + this.getBBox().height + 10)
+        return (module.config.titleMainHeight + this.getBBox().height + 10)
       })
 
-    module.d3config.attribution
+    module.config.attribution
       .attr("x", function(){
         return vizWidth - this.getBBox().width
       })
@@ -174,18 +174,18 @@ SVIFT.vis.base = (function (data, container) {
         return vizHeight - this.getBBox().height
       })
 
-    module.d3config.source
+    module.config.source
       .attr("x", 0)
       .attr("y", function(){
         return vizHeight - this.getBBox().height
       })
 
 
-    module.d3config.topTextHeight = module.d3config.topTextWrapper.node().getBBox().height + module.config.paddingTopText;
-    module.d3config.bottomTextHeight = module.d3config.bottomTextWrapper.node().getBBox().height ;
+    module.config.topTextHeight = module.config.topTextWrapper.node().getBBox().height + module.config.paddingTopText;
+    module.config.bottomTextHeight = module.config.bottomTextWrapper.node().getBBox().height ;
 
-    module.d3config.vizContainer
-      .attr('transform','translate(0,'+ module.d3config.topTextHeight +')')
+    module.config.vizContainer
+      .attr('transform','translate(0,'+ module.config.topTextHeight +')')
   }
 
   module.draw = function (t) {
