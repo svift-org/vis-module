@@ -81,7 +81,7 @@ SVIFT.vis.base = (function (data, container) {
 
     //Text Bottom
     module.config.bottomTextWrapper = module.g.append("g")
-      .attr("font-family", "Arial")
+      .attr("font-family", "InterfaceRegular")
 
     module.config.attribution = module.config.bottomTextWrapper
       .append("text")
