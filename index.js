@@ -30,9 +30,10 @@ SVIFT.vis.base = (function (data, container) {
         "1000": 20,
         "0":16
       },
-      default: "16px"
+      default: "14px"
     },
-    paddingTopText: 20
+    paddingTopText: 20,
+    paddingBottomText: 20,
   };
 
   module.timeline = {
@@ -80,7 +81,7 @@ SVIFT.vis.base = (function (data, container) {
 
     //Text Bottom
     module.config.bottomTextWrapper = module.g.append("g")
-      .attr("font-family", data.style.font)
+      .attr("font-family", "Arial")
 
     module.config.attribution = module.config.bottomTextWrapper
       .append("text")
@@ -150,7 +151,6 @@ SVIFT.vis.base = (function (data, container) {
   module.resizeText = function(){
 
     var vizWidth = module.container.node().offsetWidth - module.config.margin.left - module.config.margin.right;
-    var vizHeight= module.container.node().offsetHeight - module.config.margin.top - module.config.margin.bottom;
     var vizCenter = vizWidth/2;
 
     module.config.titleMain
@@ -166,23 +166,20 @@ SVIFT.vis.base = (function (data, container) {
         return (module.config.titleMainHeight + this.getBBox().height + 10)
       })
 
+    module.config.bottomTextWrapper
+      .attr('transform','translate(0,'+ (module.container.node().offsetHeight - module.config.margin.top - module.config.margin.bottom) +')')
+
     module.config.attribution
       .attr("x", function(){
         return vizWidth - this.getBBox().width
       })
-      .attr("y", function(){
-        return vizHeight - this.getBBox().height
-      })
 
     module.config.source
       .attr("x", 0)
-      .attr("y", function(){
-        return vizHeight - this.getBBox().height
-      })
 
 
     module.config.topTextHeight = module.config.topTextWrapper.node().getBBox().height + module.config.paddingTopText;
-    module.config.bottomTextHeight = module.config.bottomTextWrapper.node().getBBox().height ;
+    module.config.bottomTextHeight = module.config.bottomTextWrapper.node().getBBox().height + module.config.paddingBottomText ;
 
     module.config.vizContainer
       .attr('transform','translate(0,'+ module.config.topTextHeight +')')
