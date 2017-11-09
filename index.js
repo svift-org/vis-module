@@ -90,6 +90,7 @@ SVIFT.vis.base = (function (data, container) {
       .text(data.data.attribution)
       .attr("font-size", module.config.font.default)
       .attr("fill", data.style.color.second)
+      .attr("font-style","italic")
       // .attr("id", "attribution")
 
     module.config.source = module.config.bottomTextWrapper
