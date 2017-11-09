@@ -73,11 +73,13 @@ SVIFT.vis.base = (function (data, container) {
       .text(data.data.title)
       .attr("font-size", "1.7em")
       .attr("fill", data.style.color.main)
+      .attr("id", "title-main")
 
     module.config.titleSub = module.config.topTextWrapper.append("text")
       .text(data.data.subTitle)
       .attr("font-size", "1em")
       .attr("fill", data.style.color.second)
+      .attr("id", "title-sub")
 
     //Text Bottom
     module.config.bottomTextWrapper = module.g.append("g")
@@ -88,12 +90,14 @@ SVIFT.vis.base = (function (data, container) {
       .text(data.data.attribution)
       .attr("font-size", module.config.font.default)
       .attr("fill", data.style.color.second)
+      // .attr("id", "attribution")
 
     module.config.source = module.config.bottomTextWrapper
       .append("text")
       .text(data.data.source)
       .attr("font-size", module.config.font.default)
       .attr("fill", data.style.color.second)
+      .attr("id", "source")
 
     //Make a Viz Container
     module.config.vizContainer = module.g
