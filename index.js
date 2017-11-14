@@ -168,7 +168,7 @@ SVIFT.vis.base = (function (data, container) {
     module.config.titleSub
       .attr("x", vizCenter)
       .attr("y", function(){
-        return (module.config.titleMainHeight + this.getBBox().height + 10)
+        return (module.config.titleMainHeight + this.getBBox().height + 3)
       })
 
     module.config.bottomTextWrapper
