@@ -19,10 +19,10 @@ SVIFT.vis.base = (function (data, container) {
     maxHeight : 4096,
     margin : {
       //TODO: Margin should have a minimum and then be relative %
-      top: 20,
-      right: 20,
-      bottom: 20,
-      left: 20
+      top: 30,
+      right: 30,
+      bottom: 30,
+      left: 30
     },
     font:{
       sizes:{
@@ -168,7 +168,7 @@ SVIFT.vis.base = (function (data, container) {
     module.config.titleSub
       .attr("x", vizCenter)
       .attr("y", function(){
-        return (module.config.titleMainHeight + this.getBBox().height + 3)
+        return (module.config.titleMainHeight + this.getBBox().height)
       })
 
     module.config.bottomTextWrapper
