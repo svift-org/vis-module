@@ -28,8 +28,8 @@ SVIFT.vis.base = (function (data, container) {
       sizes:{
         "1500": 25,
         "1000": 20,
-        "300":16,
-        "200":12,
+        "700":16,
+        "300":12,
         "0":10
       },
       default: "14px"
