@@ -52,6 +52,11 @@ SVIFT.vis.base = (function (data, container) {
         fontSize = module.config.font.sizes[key]
       }
     }
+    if(screenWidth<=500){
+      module.config.margin.top=15;
+      module.config.margin.right=15;
+      module.config.margin.left=15;
+    }
 
     module.svg = module.container.append('svg')
       .attr('width', '100%')
