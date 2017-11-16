@@ -56,6 +56,7 @@ SVIFT.vis.base = (function (data, container) {
       module.config.margin.top=15;
       module.config.margin.right=15;
       module.config.margin.left=15;
+      module.config.margin.bottom=15;
     }
 
     module.svg = module.container.append('svg')
