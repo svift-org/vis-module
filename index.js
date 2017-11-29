@@ -19,18 +19,16 @@ SVIFT.vis.base = (function (data, container) {
     maxHeight : 4096,
     margin : {
       //TODO: Margin should have a minimum and then be relative %
-      top: 30,
-      right: 30,
-      bottom: 30,
-      left: 30
+      top: 20,
+      right: 20,
+      bottom: 20,
+      left: 20
     },
     font:{
       sizes:{
-        "1500": 25,
-        "1000": 20,
-        "700":16,
-        "300":12,
-        "0":10
+        // "1000": 20,
+        "500":16,
+        "0":14
       },
       default: "14px"
     },
@@ -45,24 +43,10 @@ SVIFT.vis.base = (function (data, container) {
 
   module.init = function () {
 
-    var screenWidth = module.container.node().offsetWidth;
-    var fontSize;
-    for( var key in module.config.font.sizes ){
-      if(screenWidth>=key){
-        fontSize = module.config.font.sizes[key]
-      }
-    }
-    if(screenWidth<=500){
-      module.config.margin.top=15;
-      module.config.margin.right=15;
-      module.config.margin.left=15;
-      module.config.margin.bottom=15;
-    }
-
     module.svg = module.container.append('svg')
       .attr('width', '100%')
       .attr('height', '100%')
-      .attr('font-size', fontSize)
+      // .attr('font-size', fontSize)
       //temporary testing for phantom rendering
       .style('background-color','#ffffff');
 
@@ -163,6 +147,24 @@ SVIFT.vis.base = (function (data, container) {
   //function that resizes/positions the text
   module.resizeText = function(){
 
+
+    var screenWidth = module.container.node().offsetWidth;
+    var fontSize;
+    for( var key in module.config.font.sizes ){
+      if(screenWidth>=key){
+        fontSize = module.config.font.sizes[key]
+      }
+    }
+    if(screenWidth<=500){
+      module.config.margin.top=15;
+      module.config.margin.right=15;
+      module.config.margin.left=15;
+      module.config.margin.bottom=15;
+    }
+
+    module.svg
+      .attr('font-size', fontSize)
+
     var vizWidth = module.container.node().offsetWidth - module.config.margin.left - module.config.margin.right;
     var vizCenter = vizWidth/2;
 
@@ -176,7 +178,7 @@ SVIFT.vis.base = (function (data, container) {
     module.config.titleSub
       .attr("x", vizCenter)
       .attr("y", function(){
-        return (module.config.titleMainHeight + this.getBBox().height)
+        return (module.config.titleMainHeight + this.getBBox().height + 5)
       })
 
     module.config.bottomTextWrapper
