@@ -13,6 +13,7 @@ SVIFT.vis.base = (function (data, container) {
   module.container = container;
   module.g = null;
   module.svg = null;
+  module.scale = false;
 
   module.config = {
     maxWidth : 4096,
@@ -43,7 +44,8 @@ SVIFT.vis.base = (function (data, container) {
 
   module.init = function () {
 
-    var screenWidth = module.container.node().offsetWidth;
+    var screenWidth = module.container.node().offsetWidth,
+      screenHeight = module.container.node().offsetHeight;
     var fontSize;
     for( var key in module.config.font.sizes ){
       if(screenWidth>=key){
@@ -55,13 +57,14 @@ SVIFT.vis.base = (function (data, container) {
       .attr('width', '100%')
       .attr('height', '100%')
       .attr('font-size', fontSize)
-      //temporary testing for phantom rendering
-      .style('background-color','#ffffff');
+      //background-color setting
+      //.style('background-color','#ffffff');
+      .attr("viewBox", "0 0 " + screenWidth + " " + screenHeight)
+      .attr("reserveAspectRatio", "xMidYMid meet");
 
     module.defs = module.svg.append('defs');
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
-
 
     //Text Top
     module.config.topTextWrapper = module.g.append("g")
@@ -128,9 +131,9 @@ SVIFT.vis.base = (function (data, container) {
 
     d3.select(window).on('resize', SVIFT.helper.debouncer(function(e){
 
+      module.preResize();
       module.resizeText()
       module.resize();
-      
 
     }, 200));
   };
@@ -146,6 +149,18 @@ SVIFT.vis.base = (function (data, container) {
   //all the drawing should be done in here
   module.update = function () {
   };
+
+  module.preResize = function() {
+    screenWidth = module.container.node().offsetWidth;
+    screenHeight = module.container.node().offsetHeight;
+    if(!module.scale){
+      module.svg.attr("viewBox", "0 0 " + screenWidth + " " + screenHeight)
+    }
+  };
+
+  module.setScale = function(s){
+    module.scale = s;
+  }
 
   module.resize = function () {
     //Resize should consider height and width (e.g. Bootstrap 16-9 resizes height and width of embed elements)
