@@ -61,8 +61,7 @@ SVIFT.vis.base = (function (data, container) {
       //.attr('font-size', fontSize)
       //background-color setting
       //.style('background-color','#ffffff');
-      .attr("viewBox", "0 0 " + screenWidth + " " + screenHeight)
-      .attr("reserveAspectRatio", "xMidYMid meet");
+      .attr("viewBox", "0 0 " + screenWidth + " " + screenHeight);
 
     module.defs = module.svg.append('defs');
     module.g = module.svg.append('g')
