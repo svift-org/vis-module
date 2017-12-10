@@ -133,8 +133,10 @@ SVIFT.vis.base = (function (data, container) {
     d3.select(window).on('resize', SVIFT.helper.debouncer(function(e){
 
       module.preResize();
-      module.resizeText()
-      module.resize();
+      if(module.scale){
+        module.resizeText();
+        module.resize();
+      }
 
     }, 200));
   };
