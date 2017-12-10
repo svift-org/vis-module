@@ -15,6 +15,8 @@ SVIFT.vis.base = (function (data, container) {
   module.svg = null;
   module.scale = false;
 
+  var screenHeight, screenWidth;
+
   module.config = {
     maxWidth : 4096,
     maxHeight : 4096,
@@ -27,9 +29,9 @@ SVIFT.vis.base = (function (data, container) {
     },
     font:{
       sizes:{
-        "1500": 25,
-        "1000": 20,
-        "0":16
+        // "1000": 20,
+        "500":16,
+        "0":14
       },
       default: "14px"
     },
@@ -44,8 +46,8 @@ SVIFT.vis.base = (function (data, container) {
 
   module.init = function () {
 
-    var screenWidth = module.container.node().offsetWidth,
-      screenHeight = module.container.node().offsetHeight;
+    screenWidth = module.container.node().offsetWidth;
+    screenHeight = module.container.node().offsetHeight;
     var fontSize;
     for( var key in module.config.font.sizes ){
       if(screenWidth>=key){
@@ -56,7 +58,7 @@ SVIFT.vis.base = (function (data, container) {
     module.svg = module.container.append('svg')
       .attr('width', '100%')
       .attr('height', '100%')
-      .attr('font-size', fontSize)
+      //.attr('font-size', fontSize)
       //background-color setting
       //.style('background-color','#ffffff');
       .attr("viewBox", "0 0 " + screenWidth + " " + screenHeight)
@@ -170,6 +172,22 @@ SVIFT.vis.base = (function (data, container) {
   //function that resizes/positions the text
   module.resizeText = function(){
 
+    var fontSize;
+    for( var key in module.config.font.sizes ){
+      if(screenWidth>=key){
+        fontSize = module.config.font.sizes[key]
+      }
+    }
+    if(screenWidth<=500){
+      module.config.margin.top=15;
+      module.config.margin.right=15;
+      module.config.margin.left=15;
+      module.config.margin.bottom=15;
+    }
+
+    module.svg
+      .attr('font-size', fontSize)
+
     var vizWidth = module.container.node().offsetWidth - module.config.margin.left - module.config.margin.right;
     var vizCenter = vizWidth/2;
 
@@ -183,7 +201,7 @@ SVIFT.vis.base = (function (data, container) {
     module.config.titleSub
       .attr("x", vizCenter)
       .attr("y", function(){
-        return (module.config.titleMainHeight + this.getBBox().height + 10)
+        return (module.config.titleMainHeight + this.getBBox().height + 5)
       })
 
     module.config.bottomTextWrapper
