@@ -61,7 +61,7 @@ SVIFT.vis.base = (function (data, container) {
       //.attr('font-size', fontSize)
       //background-color setting
       //ToDo > Transparent for Video
-      .style('background-color','#ffffff');
+      .style('background-color','#ffffff')
       .attr("viewBox", "0 0 " + screenWidth + " " + screenHeight);
 
     module.defs = module.svg.append('defs');
