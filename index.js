@@ -142,6 +142,12 @@ SVIFT.vis.base = (function (data, container) {
     }, 200));
   };
 
+  //temporary workaround to jump back to the beginning of the timeline
+  module.reset = function () {
+    module.container.selectAll('*').remove();
+    module.init();
+  };
+
   //function that processes the data
   module.process = function () {
   };
