@@ -213,7 +213,7 @@ SVIFT.vis.base = (function (data, container) {
       })
 
     module.config.bottomTextWrapper
-      .attr('transform','translate(0,'+ (module.container.node().offsetHeight - module.config.margin.top - module.config.margin.bottom) +')')
+      .attr('transform','translate(0,'+ (module.container.node().offsetHeight - (module.config.margin.top + module.config.margin.bottom)) +')')
 
     module.config.attribution
       .attr("x", function(){
