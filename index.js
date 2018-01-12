@@ -27,7 +27,7 @@ SVIFT.vis.base = (function (data, container) {
     font:{
       sizes:{
         // "1000": 20,
-        "500":16,
+        "450":16,
         "0":14
       },
       default: "14px"
@@ -63,13 +63,13 @@ SVIFT.vis.base = (function (data, container) {
 
     module.config.titleMain = module.config.topTextWrapper.append("text")
       .text(data.data.title)
-      .attr("font-size", "1.7em")
+      .attr("font-size", "2em")
       .attr("fill", data.style.color.main)
       .attr("id", "title-main")
 
     module.config.titleSub = module.config.topTextWrapper.append("text")
       .text(data.data.subTitle)
-      .attr("font-size", "1em")
+      .attr("font-size", "1.3em")
       .attr("fill", data.style.color.second)
       .attr("id", "title-sub")
 
@@ -178,7 +178,7 @@ SVIFT.vis.base = (function (data, container) {
     module.config.titleSub
       .attr("x", vizCenter)
       .attr("y", function(){
-        return (module.config.titleMainHeight + this.getBBox().height + 5)
+        return (module.config.titleMainHeight + this.getBBox().height + 15)
       })
 
     module.config.bottomTextWrapper
