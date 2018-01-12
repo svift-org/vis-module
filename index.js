@@ -68,6 +68,12 @@ SVIFT.vis.base = (function (data, container) {
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
 
+    module.svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("fill", "#ffffff")
+        .attr("id", "vis-background");
+
     //Text Top
     module.config.topTextWrapper = module.g.append("g")
       .attr("text-anchor", "middle")
