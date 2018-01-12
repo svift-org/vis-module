@@ -13,6 +13,9 @@ SVIFT.vis.base = (function (data, container) {
   module.container = container;
   module.g = null;
   module.svg = null;
+  module.scale = false;
+
+  var screenHeight, screenWidth;
 
   module.config = {
     maxWidth : 4096,
@@ -43,17 +46,27 @@ SVIFT.vis.base = (function (data, container) {
 
   module.init = function () {
 
+    screenWidth = module.container.node().offsetWidth;
+    screenHeight = module.container.node().offsetHeight;
+    var fontSize;
+    for( var key in module.config.font.sizes ){
+      if(screenWidth>=key){
+        fontSize = module.config.font.sizes[key]
+      }
+    }
+
     module.svg = module.container.append('svg')
       .attr('width', '100%')
       .attr('height', '100%')
-      // .attr('font-size', fontSize)
-      //temporary testing for phantom rendering
-      .style('background-color','#ffffff');
+      //.attr('font-size', fontSize)
+      //background-color setting
+      //ToDo > Transparent for Video
+      .style('background-color','#ffffff')
+      .attr("viewBox", "0 0 " + screenWidth + " " + screenHeight);
 
     module.defs = module.svg.append('defs');
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
-
 
     //Text Top
     module.config.topTextWrapper = module.g.append("g")
@@ -120,11 +133,19 @@ SVIFT.vis.base = (function (data, container) {
 
     d3.select(window).on('resize', SVIFT.helper.debouncer(function(e){
 
-      module.resizeText()
-      module.resize();
-      
+      module.preResize();
+      if(!module.scale){
+        module.resizeText();
+        module.resize();
+      }
 
     }, 200));
+  };
+
+  //temporary workaround to jump back to the beginning of the timeline
+  module.reset = function () {
+    module.container.selectAll('*').remove();
+    module.init();
   };
 
   //function that processes the data
@@ -139,6 +160,18 @@ SVIFT.vis.base = (function (data, container) {
   module.update = function () {
   };
 
+  module.preResize = function() {
+    screenWidth = module.container.node().offsetWidth;
+    screenHeight = module.container.node().offsetHeight;
+    if(!module.scale){
+      module.svg.attr("viewBox", "0 0 " + screenWidth + " " + screenHeight)
+    }
+  };
+
+  module.setScale = function(s){
+    module.scale = s;
+  }
+
   module.resize = function () {
     //Resize should consider height and width (e.g. Bootstrap 16-9 resizes height and width of embed elements)
     //For some weird reason phantom resizes the page before every rendering, pay attention to this problem
@@ -147,8 +180,6 @@ SVIFT.vis.base = (function (data, container) {
   //function that resizes/positions the text
   module.resizeText = function(){
 
-
-    var screenWidth = module.container.node().offsetWidth;
     var fontSize;
     for( var key in module.config.font.sizes ){
       if(screenWidth>=key){
