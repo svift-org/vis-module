@@ -64,11 +64,11 @@ SVIFT.vis.base = (function (data, container) {
       .style('background-color','#ffffff')
       .attr("viewBox", "0 0 " + screenWidth + " " + screenHeight);
 
-    module.svg.append("rect")
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr("fill", "#ffffff")
-        .attr("id", "vis-background");
+    // module.svg.append("rect")
+    //     .attr("width", "100%")
+    //     .attr("height", "100%")
+    //     .attr("fill", "#ffffff")
+    //     .attr("id", "vis-background");
 
     module.defs = module.svg.append('defs');
     module.g = module.svg.append('g')
