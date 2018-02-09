@@ -30,10 +30,10 @@ SVIFT.vis.base = (function (data, container) {
     font:{
       sizes:{
         // "1000": 20,
-        "450":16,
-        "0":14
+        "450":15,
+        "0":13
       },
-      default: "14px"
+      default: "13px"
     },
     paddingTopText: 20,
     paddingBottomText: 20,
@@ -76,14 +76,14 @@ SVIFT.vis.base = (function (data, container) {
 
     //Text Top
     module.config.topTextWrapper = module.g.append("g")
-      .attr("text-anchor", "middle")
+      .attr("text-anchor", "start")
       .attr("class", "title-wrapper" )
       .attr("font-family", data.style.font)
 
     module.config.titleMain = module.config.topTextWrapper.append("text")
       .text(data.data.title)
       .attr("font-size", "2em")
-      .attr("fill", data.style.color.main)
+      // .attr("fill", data.style.color.main)
       .attr("id", "title-main")
 
     module.config.titleSub = module.config.topTextWrapper.append("text")
@@ -206,14 +206,14 @@ SVIFT.vis.base = (function (data, container) {
     var vizCenter = vizWidth/2;
 
     module.config.titleMain
-      .attr("x", vizCenter)
+      // .attr("x", vizCenter)
       .attr("y", function(){
         module.config.titleMainHeight = this.getBBox().height
         return module.config.titleMainHeight
       })
 
     module.config.titleSub
-      .attr("x", vizCenter)
+      // .attr("x", vizCenter)
       .attr("y", function(){
         return (module.config.titleMainHeight + this.getBBox().height + 5)
       })
