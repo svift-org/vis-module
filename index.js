@@ -128,8 +128,6 @@ SVIFT.vis.base = (function (data, container) {
     /*TODO: get current width, transform accordingly font-family/size via css
     record height for vizSize*/
 
-    console.log('updateHead');
-
       var headlineMax = 30,
           headlineHeight = 0,
           headlineLineHeight = 1.1,

@@ -29,21 +29,7 @@ svg{
 	font-size:1.3em;
 }
 
-svg, svg.theme-Classic{
-
-	font-family:'IBM Plex Mono';
-
-	.titleFont, .subtitleFont{
-		font-family:'IBM Plex Sans Condensed';
-	}
-
-	.bottomTextWrapper{
-		font-family:'IBM Plex Sans Condensed';
-	}
-
-}
-
-svg, svg.theme-Now{
+svg.theme-Classic{
 
 	font-family:'IBM Plex Mono';
 
@@ -58,7 +44,7 @@ svg, svg.theme-Now{
 	}
 }
 
-svg.theme-Modern{
+svg, svg.theme-Modern{
 	font-family:'Roboto Mono';
 
 	.titleFont{
