@@ -141,7 +141,7 @@ SVIFT.vis.base = (function (data, container) {
                   line = module.text.title.append('tspan')
                       .text(l)
                       .style('font-size', localSize);
-              while(line.node().getComputedTextLength() > (width-2*margin) || localSize < 5){
+              while(line.node().getComputedTextLength() > (module.vizSize.width) || localSize < 5){
                   localSize--;
                   line.style('font-size', localSize);
               }
@@ -171,7 +171,7 @@ SVIFT.vis.base = (function (data, container) {
                   line = module.text.subtitle.append('tspan')
                       .text(l)
                       .style('font-size', localSize);
-              while(line.node().getComputedTextLength() > (width-2*margin) || localSize < 5){
+              while(line.node().getComputedTextLength() > (module.vizSize.width) || localSize < 5){
                   localSize--;
                   line.style('font-size', localSize);
               }
