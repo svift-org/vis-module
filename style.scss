@@ -1,5 +1,6 @@
 /*
 
+
 "main": "#71609B",
 "second": "",
 "background": "#fff",
@@ -28,16 +29,61 @@ svg{
 	font-size:1.3em;
 }
 
-svg.theme-1{
+svg, svg.theme-classic{
+
+	font-family:'IBM Plex Mono';
+
+	.titleFont, .subtitleFont{
+		font-family:'IBM Plex Sans Condensed';
+	}
+
+	.bottomTextWrapper{
+		font-family:'IBM Plex Sans Condensed';
+	}
+
+}
+
+svg, svg.theme-now{
+
+	font-family:'IBM Plex Mono';
 
 	.titleFont{
-		font-size:2em;
+		font-family:'IBM Plex Serif';
+		font-weight:700;
 	}
 
-	.subtitleFont{
+	.bottomTextWrapper, .subtitleFont{
+		font-family:'IBM Plex Serif';
+		font-weight:400;
+	}
+}
 
+svg.theme-modern{
+	font-family:'Roboto Mono';
+
+	.titleFont{
+		font-family:'Roboto Condensed';
+		font-weight:700;
 	}
 
+	.subtitleFont, .bottomTextWrapper{
+		font-family:'Roboto Condensed';
+		font-weight:400;
+	}
+}
+
+svg.theme-future{
+	font-family:'Roboto Mono';
+
+	.titleFont{
+		font-family:'Roboto Slab';
+		font-weight:700;
+	}
+
+	.subtitleFont, .bottomTextWrapper{
+		font-family:'Roboto Slab';
+		font-weight:400;
+	}
 }
 
 .title-wrapper{
