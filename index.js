@@ -217,7 +217,8 @@ SVIFT.vis.base = (function (data, container) {
 
   module.setTheme = function(theme){
     module.theme = theme;
-    module.svg.attr('class', theme);
+    module.svg.attr('class', 'theme-'+theme);
+    module.updateHead();
   };
 
   module.updateSource = function(){
