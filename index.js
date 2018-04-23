@@ -179,6 +179,7 @@ SVIFT.vis.base = (function (data, container) {
               var localSize = copyMax,
                   line = module.text.subtitle.append('tspan')
                       .text(l)
+                      .attr('x',0)
                       .style('font-size', localSize);
               while(line.node().getComputedTextLength() > (module.vizSize.width) || localSize < 5){
                   localSize--;
@@ -195,7 +196,7 @@ SVIFT.vis.base = (function (data, container) {
               })
               .style('font-size', copySize);
 
-          module.text.subtitle.style('transform','translate(0,'+(headlineHeight+copySize*1.25)+')');
+          module.text.subtitle.attr('transform','translate(0,'+Math.round(headlineHeight+copySize*1.25)+')');
 
           copyHeight += copySize*1.25 + (copySize * copyLineHeight)*(lines.length-1);
       }
