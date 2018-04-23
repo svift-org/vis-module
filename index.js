@@ -191,8 +191,8 @@ SVIFT.vis.base = (function (data, container) {
 
       module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight;
 
-      module.resize();
-      module.draw(module.playHead);
+      //module.resize();
+      //module.draw(module.playHead);
   };
 
 
