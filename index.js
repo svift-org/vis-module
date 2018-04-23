@@ -21,6 +21,7 @@ SVIFT.vis.base = (function (data, container) {
   module.vizContainer = null;
   module.vizSize = {width:500,height:500};
   module.containerSize = {width:0,height:0};
+  module.theme = '';
 
   module.config = {
     maxWidth : 4096,
@@ -59,7 +60,7 @@ SVIFT.vis.base = (function (data, container) {
     
     module.svg = module.container.append('svg')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
-      .attr('class', module.data.style.theme);
+      .attr('class', module.theme);
 
     module.defs = module.svg.append('defs');
 
@@ -214,7 +215,10 @@ SVIFT.vis.base = (function (data, container) {
       //module.draw(module.playHead);
   };
 
-
+  module.setTheme = function(theme){
+    module.theme = theme;
+    module.svg.attr('class', theme);
+  };
 
   module.updateSource = function(){
     module.text.source.text(data.data.source);
