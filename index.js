@@ -154,6 +154,8 @@ SVIFT.vis.base = (function (data, container) {
               }
           });
 
+          module.text.title.attr('transform','translate(0,'+headlineSize+')');
+
           module.text.title.selectAll('tspan')
             .attr('dy', function(d,i){
               return (i>0)?(headlineSize*headlineLineHeight):0;
@@ -170,8 +172,6 @@ SVIFT.vis.base = (function (data, container) {
 
       if(data.data.subTitle.length > 0){
           lines = data.data.subTitle.split('\n');
-
-          module.text.subtitle.style('transform','translate(0,'+headlineHeight+')');
 
           module.text.subtitle.selectAll('tspan').remove();
 
@@ -190,7 +190,12 @@ SVIFT.vis.base = (function (data, container) {
           });
 
           module.text.subtitle.selectAll('tspan')
+              .attr('dy', function(d,i){
+                return (i>0)?(copySize*copyLineHeight):0;
+              })
               .style('font-size', copySize);
+
+          module.text.subtitle.style('transform','translate(0,'+(headlineHeight+copySize*1.25)+')');
 
           copyHeight += copySize*1.25 + (copySize * copyLineHeight)*(lines.length-1);
       }
