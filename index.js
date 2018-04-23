@@ -127,8 +127,9 @@ SVIFT.vis.base = (function (data, container) {
     /*TODO: get current width, transform accordingly font-family/size via css
     record height for vizSize*/
 
+    console.log('updateHead');
+
       var headlineMax = 30,
-          fontHeight = 0,
           headlineHeight = 0,
           headlineLineHeight = 1.1,
           headlineSize = headlineMax;
@@ -136,10 +137,11 @@ SVIFT.vis.base = (function (data, container) {
       if(data.data.title.length > 0){
           var lines = data.data.title.split('\n');
 
-          lines.forEach(function(l){
+          lines.forEach(function(l,li){
               var localSize = headlineMax,
                   line = module.text.title.append('tspan')
                       .text(l)
+                      .attr('x',0)
                       .style('font-size', localSize);
               while(line.node().getComputedTextLength() > (module.vizSize.width) || localSize < 5){
                   localSize--;
@@ -151,6 +153,9 @@ SVIFT.vis.base = (function (data, container) {
           });
 
           module.text.title.selectAll('tspan')
+            .attr('dy', function(d,i){
+              return (i>0)?(headlineSize*headlineLineHeight):0;
+            })
             .style('font-size', headlineSize);
 
           headlineHeight = (headlineSize*headlineLineHeight) * (lines.length - 1) + headlineSize;
