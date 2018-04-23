@@ -137,6 +137,8 @@ SVIFT.vis.base = (function (data, container) {
       if(data.data.title.length > 0){
           var lines = data.data.title.split('\n');
 
+          module.text.title.selectAll('tspan').remove();
+
           lines.forEach(function(l,li){
               var localSize = headlineMax,
                   line = module.text.title.append('tspan')
@@ -170,6 +172,8 @@ SVIFT.vis.base = (function (data, container) {
           lines = data.data.subTitle.split('\n');
 
           module.text.subtitle.style('transform','translate(0,'+headlineHeight+')');
+
+          module.text.subtitle.selectAll('tspan').remove();
 
           lines.forEach(function(l){
               var localSize = copyMax,
