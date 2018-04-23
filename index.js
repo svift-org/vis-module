@@ -77,10 +77,12 @@ SVIFT.vis.base = (function (data, container) {
     //Text Bottom
     //TODO: Move all the font declarations to the stylesheet so we can easily apply themes and change the fonts etc.
     module.text.foot = module.g.append("g")
+      .style('transform', 'translate(0,'+module.containerSize.height-module.config.margin.bottom-module.config.margin.top+')')
       .attr('class', 'bottomTextWrapper');
 
     module.text.attribution = module.text.foot
       .append("text")
+      .attr('x', module.containerSize.width-module.config.margin.left-module.config.margin.right)
       .text(data.data.attribution)
       .attr('class', 'attribution');
 
