@@ -204,6 +204,8 @@ SVIFT.vis.base = (function (data, container) {
         .attr('transform','translate(0,'+ (copyHeight+headlineHeight) +')');
 
       module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight;
+
+      module.resize();
   };
 
   module.setTheme = function(theme){
