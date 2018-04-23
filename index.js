@@ -161,8 +161,8 @@ SVIFT.vis.base = (function (data, container) {
           copyHeight = 0,
           copySize = (copyMax > headlineSize)?headlineSize*0.75:copyMax;
 
-      if(data.data.subtitle.length > 0){
-          lines = data.data.subtitle.split('\n');
+      if(data.data.subTitle.length > 0){
+          lines = data.data.subTitle.split('\n');
 
           module.text.subtitle.style('transform','translate(0,'+headlineHeight+')');
 
