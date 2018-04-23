@@ -10,12 +10,17 @@ SVIFT.vis.base = (function (data, container) {
   var module = {};
 
   module.data = data;
+  module.setData = function(data){
+    module.data = data;
+  };
+
   module.container = container;
   module.g = null;
   module.svg = null;
   module.scale = false;
-
-  var screenHeight, screenWidth;
+  module.vizContainer = null;
+  module.vizSize = {width:500,height:500};
+  module.containerSize = {};
 
   module.config = {
     maxWidth : 4096,
@@ -35,9 +40,10 @@ SVIFT.vis.base = (function (data, container) {
       },
       default: "13px"
     },
-    paddingTopText: 20,
-    paddingBottomText: 20,
+    footerHeight: 40,
   };
+
+  module.text = {};
 
   module.timeline = {
     //Start and End are in Milliseconds, func receives a value between 0 and 1, obj is a container to store related info e.g. easing, etc.
@@ -46,83 +52,57 @@ SVIFT.vis.base = (function (data, container) {
 
   module.init = function () {
 
-    screenWidth = module.container.node().offsetWidth;
-    screenHeight = module.container.node().offsetHeight;
+    module.containerSize.width = module.container.node().offsetWidth;
+    module.containerSize.height = module.container.node().offsetHeight;
     var fontSize;
     for( var key in module.config.font.sizes ){
-      if(screenWidth>=key){
+      if(module.containerSize.width>=key){
         fontSize = module.config.font.sizes[key]
       }
     }
 
     module.svg = module.container.append('svg')
-      .attr('width', '100%')
-      .attr('height', '100%')
-      //.attr('font-size', fontSize)
-      //background-color setting
-      //ToDo > Transparent for Video
-      .style('background-color','#ffffff')
-      .attr("viewBox", "0 0 " + screenWidth + " " + screenHeight);
-
-    // module.svg.append("rect")
-    //     .attr("width", "100%")
-    //     .attr("height", "100%")
-    //     .attr("fill", "#ffffff")
-    //     .attr("id", "vis-background");
+      .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
+      .attr('class', data.style.theme);
 
     module.defs = module.svg.append('defs');
+
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
 
     //Text Top
-    module.config.topTextWrapper = module.g.append("g")
-      .attr("text-anchor", "start")
-      .attr("class", "title-wrapper" )
-      .attr("font-family", data.style.font)
+    module.text.head = module.g.append('g')
+      .attr('class', 'title-wrapper');
 
-    module.config.titleMain = module.config.topTextWrapper.append("text")
-      .text(data.data.title)
-      .attr("font-size", "2em")
-      // .attr("fill", data.style.color.main)
-      .attr("id", "title-main")
+    module.text.title = module.text.head.append('text').attr('class', 'titleFont');
 
-    module.config.titleSub = module.config.topTextWrapper.append("text")
-      .text(data.data.subTitle)
-      .attr("font-size", "1.3em")
-      .attr("fill", data.style.color.second)
-      .attr("id", "title-sub")
+    module.text.subtitle = module.text.head.append('text').attr('class', 'subtitleFont');
 
     //Text Bottom
-    module.config.bottomTextWrapper = module.g.append("g")
-      .attr("font-family", "InterfaceRegular")
+    //TODO: Move all the font declarations to the stylesheet so we can easily apply themes and change the fonts etc.
+    module.text.foot = module.g.append("g")
+      .attr('class', 'bottomTextWrapper');
 
-    module.config.attribution = module.config.bottomTextWrapper
+    module.text.attribution = module.text.foot
       .append("text")
       .text(data.data.attribution)
-      .attr("font-size", module.config.font.default)
-      .attr("fill", data.style.color.second)
-      .attr("font-style","italic")
-      // .attr("id", "attribution")
+      .attr('class', 'attribution');
 
-    module.config.source = module.config.bottomTextWrapper
-      .append("text")
+    module.text.source = module.text.foot
+      .append('text')
       .text(data.data.source)
-      .attr("font-size", module.config.font.default)
-      .attr("fill", data.style.color.second)
-      .attr("id", "source")
+      .attr('class', 'source');
 
     //Make a Viz Container
-    module.config.vizContainer = module.g
+    module.vizContainer = module.g
       .append("g")
       .attr("class", "viz-container")
 
-
     module.playHead = 0;
 
+    module.updateHead();
     module.setup();
-    module.resizeText()
     module.resize();
-    
 
     for( var key in module.timeline ){
       var tl = module.timeline[key];
@@ -141,11 +121,88 @@ SVIFT.vis.base = (function (data, container) {
 
       module.preResize();
       if(!module.scale){
-        module.resizeText();
         module.resize();
       }
 
     }, 200));
+  };
+
+  module.updateHead = function(){
+    /*TODO: get current width, transform accordingly font-family/size via css
+    record height for vizSize*/
+
+      var headlineMax = 30,
+          fontHeight = 0,
+          headlineHeight = 0,
+          headlineLineHeight = 1.1,
+          headlineSize = headlineMax;
+
+      if(data.data.title.length > 0){
+          var lines = data.data.title.split('\n');
+
+          lines.forEach(function(l){
+              var localSize = headlineMax,
+                  line = module.text.title.append('tspan')
+                      .text(l)
+                      .style('font-size', localSize);
+              while(line.node().getComputedTextLength() > (width-2*margin) || localSize < 5){
+                  localSize--;
+                  line.style('font-size', localSize);
+              }
+              if(headlineSize>localSize){
+                  headlineSize = localSize;
+              }
+          });
+
+          module.text.title.selectAll('tspan')
+            .style('font-size', headlineSize);
+
+          headlineHeight = (headlineSize*headlineLineHeight) * (lines.length - 1) + headlineSize;
+      }
+
+      var copyMax = 15,
+          copyLineHeight = 1.1,
+          copyHeight = 0,
+          copySize = (copyMax > headlineSize)?headlineSize*0.75:copyMax;
+
+      if(copy.length > 0){
+          lines = copy.split('\n');
+
+          module.text.subtitle.style('transform','translate(0,'+headlineHeight+')');
+
+          lines.forEach(function(l){
+              var localSize = copyMax,
+                  line = module.text.subtitle.append('tspan')
+                      .text(l)
+                      .style('font-size', localSize);
+              while(line.node().getComputedTextLength() > (width-2*margin) || localSize < 5){
+                  localSize--;
+                  line.style('font-size', localSize);
+              }
+              if(copySize>localSize){
+                  copySize = localSize;
+              }
+          });
+
+          module.text.subtitle.selectAll('tspan')
+              .style('font-size', copySize);
+
+          copyHeight += copySize*1.25 + (copySize * copyLineHeight)*(lines.length-1);
+      }
+
+      module.vizContainer
+        .attr('transform','translate(0,'+ (copyHeight+headlineHeight) +')');
+
+      module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-config.margin.top-config.margin.bottom-config.footerHeight;
+
+      module.resize();
+      module.draw(module.playHead);
+  };
+
+
+
+  module.updateSource = function(){
+    module.text.source.text(data.data.source);
   };
 
   //temporary workaround to jump back to the beginning of the timeline
@@ -167,10 +224,10 @@ SVIFT.vis.base = (function (data, container) {
   };
 
   module.preResize = function() {
-    screenWidth = module.container.node().offsetWidth;
-    screenHeight = module.container.node().offsetHeight;
+    module.containerSize.width = module.container.node().offsetWidth;
+    module.containerSize.height = module.container.node().offsetHeight;
     if(!module.scale){
-      module.svg.attr("viewBox", "0 0 " + screenWidth + " " + screenHeight)
+      module.svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
     }
   };
 
@@ -182,60 +239,6 @@ SVIFT.vis.base = (function (data, container) {
     //Resize should consider height and width (e.g. Bootstrap 16-9 resizes height and width of embed elements)
     //For some weird reason phantom resizes the page before every rendering, pay attention to this problem
   };
-
-  //function that resizes/positions the text
-  module.resizeText = function(){
-
-    var fontSize;
-    for( var key in module.config.font.sizes ){
-      if(screenWidth>=key){
-        fontSize = module.config.font.sizes[key]
-      }
-    }
-    if(screenWidth<=500){
-      module.config.margin.top=15;
-      module.config.margin.right=15;
-      module.config.margin.left=15;
-      module.config.margin.bottom=15;
-    }
-
-    module.svg
-      .attr('font-size', fontSize)
-
-    var vizWidth = module.container.node().offsetWidth - module.config.margin.left - module.config.margin.right;
-    var vizCenter = vizWidth/2;
-
-    module.config.titleMain
-      // .attr("x", vizCenter)
-      .attr("y", function(){
-        module.config.titleMainHeight = this.getBBox().height
-        return module.config.titleMainHeight
-      })
-
-    module.config.titleSub
-      // .attr("x", vizCenter)
-      .attr("y", function(){
-        return (module.config.titleMainHeight + this.getBBox().height + 5)
-      })
-
-    module.config.bottomTextWrapper
-      .attr('transform','translate(0,'+ (module.container.node().offsetHeight - (module.config.margin.top + module.config.margin.bottom + (module.config.margin.bottom/2))) +')')
-
-    module.config.attribution
-      .attr("x", function(){
-        return vizWidth - this.getBBox().width
-      })
-
-    module.config.source
-      .attr("x", 0)
-
-
-    module.config.topTextHeight = module.config.topTextWrapper.node().getBBox().height + module.config.paddingTopText;
-    module.config.bottomTextHeight = module.config.bottomTextWrapper.node().getBBox().height + module.config.paddingBottomText ;
-
-    module.config.vizContainer
-      .attr('transform','translate(0,'+ module.config.topTextHeight +')')
-  }
 
   module.draw = function (t) {
     for( var key in module.timeline ){
