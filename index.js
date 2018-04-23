@@ -99,7 +99,6 @@ SVIFT.vis.base = (function (data, container) {
 
     module.setup();
     module.updateHead();
-    module.resize();
 
     for( var key in module.timeline ){
       var tl = module.timeline[key];
@@ -117,9 +116,9 @@ SVIFT.vis.base = (function (data, container) {
     d3.select(window).on('resize', SVIFT.helper.debouncer(function(e){
 
       module.preResize();
-      if(!module.scale){
-        module.resize();
-      }
+      // if(!module.scale){
+      //   module.resize();
+      // }
 
     }, 200));
   };
@@ -243,6 +242,7 @@ SVIFT.vis.base = (function (data, container) {
     if(!module.scale){
       module.svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
     }
+    module.updateHead();
   };
 
   module.setScale = function(s){
