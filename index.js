@@ -20,7 +20,7 @@ SVIFT.vis.base = (function (data, container) {
   module.scale = false;
   module.vizContainer = null;
   module.vizSize = {width:500,height:500};
-  module.containerSize = {};
+  module.containerSize = {width:0,height:0};
 
   module.config = {
     maxWidth : 4096,
@@ -54,16 +54,12 @@ SVIFT.vis.base = (function (data, container) {
 
     module.containerSize.width = module.container.node().offsetWidth;
     module.containerSize.height = module.container.node().offsetHeight;
-    var fontSize;
-    for( var key in module.config.font.sizes ){
-      if(module.containerSize.width>=key){
-        fontSize = module.config.font.sizes[key]
-      }
-    }
-
+    module.vizSize.width = module.containerSize.width - module.config.margin.right - module.config.margin.left;
+    module.vizSize.height = module.containerSize.height;
+    
     module.svg = module.container.append('svg')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
-      .attr('class', data.style.theme);
+      .attr('class', module.data.style.theme);
 
     module.defs = module.svg.append('defs');
 
@@ -101,8 +97,8 @@ SVIFT.vis.base = (function (data, container) {
     module.playHead = 0;
 
     module.updateHead();
-    module.setup();
-    module.resize();
+    //module.setup();
+    //module.resize();
 
     for( var key in module.timeline ){
       var tl = module.timeline[key];
