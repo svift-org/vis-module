@@ -98,8 +98,8 @@ SVIFT.vis.base = (function (data, container) {
     module.playHead = 0;
 
     module.updateHead();
-    //module.setup();
-    //module.resize();
+    module.setup();
+    module.resize();
 
     for( var key in module.timeline ){
       var tl = module.timeline[key];
@@ -204,9 +204,6 @@ SVIFT.vis.base = (function (data, container) {
         .attr('transform','translate(0,'+ (copyHeight+headlineHeight) +')');
 
       module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight;
-
-      //module.resize();
-      //module.draw(module.playHead);
   };
 
   module.setTheme = function(theme){
@@ -221,8 +218,9 @@ SVIFT.vis.base = (function (data, container) {
 
   //temporary workaround to jump back to the beginning of the timeline
   module.reset = function () {
-    module.container.selectAll('*').remove();
-    module.init();
+    module.vizContainer.selectAll('*').remove();
+    module.setup();
+    module.resize();
   };
 
   //function that processes the data
