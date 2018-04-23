@@ -97,8 +97,8 @@ SVIFT.vis.base = (function (data, container) {
 
     module.playHead = 0;
 
-    module.updateHead();
     module.setup();
+    module.updateHead();
     module.resize();
 
     for( var key in module.timeline ){
