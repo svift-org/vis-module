@@ -21,7 +21,7 @@ SVIFT.vis.base = (function (data, container) {
   module.vizContainer = null;
   module.vizSize = {width:500,height:500};
   module.containerSize = {width:0,height:0};
-  module.theme = '';
+  module.theme = data.style.theme;
 
   module.config = {
     maxWidth : 4096,
