@@ -21,15 +21,27 @@ svg{
 	height:100%;
 }
 
+/*------ Fonts ------*/
+
 .titleFont{
 	font-size:2em;
+	fill:#000;
 }
 
 .subtitleFont{
 	font-size:1.3em;
+	fill:#000;
 }
 
-svg.theme-Classic{
+.visText{
+	font-size:1em;
+	fill:#9A9A9A;
+	&.bold{
+		font-weight:bold;
+	}
+}
+
+svg.Classic{
 
 	font-family:'IBM Plex Mono';
 
@@ -44,7 +56,7 @@ svg.theme-Classic{
 	}
 }
 
-svg, svg.theme-Modern{
+svg, svg.Modern{
 	font-family:'Roboto Mono';
 
 	.titleFont{
@@ -58,7 +70,7 @@ svg, svg.theme-Modern{
 	}
 }
 
-svg.theme-Future{
+svg.Future{
 	font-family:'Roboto Mono';
 
 	.titleFont{
@@ -69,6 +81,44 @@ svg.theme-Future{
 	.subtitleFont, .bottomTextWrapper{
 		font-family:'Roboto Slab';
 		font-weight:400;
+	}
+}
+
+/*------ Colors ------*/
+
+svg.apricot{
+	.visFill{
+		fill:#71609B;
+	}
+}
+
+svg.purple{
+	.visFill{
+		fill:#FE9592;
+	}
+}
+
+svg.red{
+	.visFill{
+		fill:#B8E986;
+	}
+}
+
+svg.green{
+	.visFill{
+		fill:#FF5C5C;
+	}
+}
+
+svg.orange{
+	.visFill{
+		fill:#75FABF;
+	}
+}
+
+svg.turquoise{
+	.visFill{
+		fill:#FBC469;
 	}
 }
 

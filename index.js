@@ -23,6 +23,7 @@ SVIFT.vis.base = (function (data, container) {
   module.vizInitSize = {width:500,height:500};
   module.containerSize = {width:0,height:0};
   module.theme = data.style.theme;
+  module.color = data.style.color.main;
 
   module.config = {
     maxWidth : 4096,
@@ -61,7 +62,7 @@ SVIFT.vis.base = (function (data, container) {
     
     module.svg = module.container.append('svg')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
-      .attr('class', module.theme);
+      .attr('class', module.theme+' '+module.color);
 
     module.defs = module.svg.append('defs');
 
@@ -213,8 +214,16 @@ SVIFT.vis.base = (function (data, container) {
   };
 
   module.setTheme = function(theme){
+    module.svg.classed(module.theme, false);
     module.theme = theme;
-    module.svg.attr('class', 'theme-'+theme);
+    module.svg.classed(module.theme, true);
+    module.updateHead();
+  };
+
+  module.setColor = function(color){
+    module.svg.classed(module.color, false);
+    module.color = color;
+    module.svg.classed(module.color, true);
     module.updateHead();
   };
 
