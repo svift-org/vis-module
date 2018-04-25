@@ -33,13 +33,25 @@ svg{
 	fill:#000;
 }
 
-.visText{
+.labelText{
 	font-size:1em;
 	fill:#9A9A9A;
+	font-family:'IBM Plex Sans Condensed';
 	&.bold{
 		font-weight:bold;
 	}
 }
+
+
+.labelNumber{
+	font-size:1em;
+	fill:#9A9A9A;
+	font-family:'IBM Plex Mono';
+	&.bold{
+		font-weight:bold;
+	}
+}
+
 
 svg.Classic{
 
