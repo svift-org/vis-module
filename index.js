@@ -196,7 +196,7 @@ SVIFT.vis.base = (function (data, container) {
               })
               .style('font-size', copySize);
 
-          module.text.subtitle.attr('transform','translate(0,'+Math.round(headlineHeight+copySize*1.45)+')');
+          module.text.subtitle.attr('transform','translate(0,'+Math.round(headlineHeight+copySize*1.65)+')');
 
           copyHeight += copySize*2 + (copySize * copyLineHeight)*(lines.length-1);
       }
