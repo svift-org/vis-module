@@ -205,10 +205,10 @@ SVIFT.vis.base = (function (data, container) {
         .attr('transform','translate(0,'+ (copyHeight+headlineHeight) +')');
 
       if(!module.scale){
-        module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight;
+        module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight +20;
         module.vizSize.width = module.containerSize.width-module.config.margin.left-module.config.margin.right;
       }else{
-        module.vizSize.height = module.vizInitSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight;
+        module.vizSize.height = module.vizInitSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight +20;
         module.vizSize.width = module.vizInitSize.width-module.config.margin.left-module.config.margin.right;
       }
 
