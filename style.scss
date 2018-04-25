@@ -55,7 +55,7 @@ svg{
 
 svg.Classic{
 
-	font-family:'IBM Plex Mono';
+	font-family:'IBM Plex Serif';
 
 	.titleFont{
 		font-family:'IBM Plex Serif';
@@ -63,35 +63,35 @@ svg.Classic{
 	}
 
 	.bottomTextWrapper, .subtitleFont{
-		font-family:'IBM Plex Serif';
+		font-family:'IBM Plex Sans Condensed';
 		font-weight:400;
 	}
 }
 
 svg, svg.Modern{
-	font-family:'Roboto Mono';
+	font-family:'IBM Plex Sans Condensed';
 
 	.titleFont{
-		font-family:'Roboto Condensed';
+		font-family:'IBM Plex Sans Condensed';
 		font-weight:700;
 	}
 
 	.subtitleFont, .bottomTextWrapper{
-		font-family:'Roboto Condensed';
+		font-family:'IBM Plex Sans Condensed';
 		font-weight:400;
 	}
 }
 
 svg.Future{
-	font-family:'Roboto Mono';
+	font-family:'IBM Plex Mono';
 
 	.titleFont{
-		font-family:'Roboto Slab';
+		font-family:'IBM Plex Mono';
 		font-weight:700;
 	}
 
 	.subtitleFont, .bottomTextWrapper{
-		font-family:'Roboto Slab';
+		font-family:'IBM Plex Sans Condensed';
 		font-weight:400;
 	}
 }
