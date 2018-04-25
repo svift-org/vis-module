@@ -20,6 +20,7 @@ SVIFT.vis.base = (function (data, container) {
   module.scale = false;
   module.vizContainer = null;
   module.vizSize = {width:500,height:500};
+  module.vizInitSize = {width:500,height:500};
   module.containerSize = {width:0,height:0};
   module.theme = data.style.theme;
 
@@ -55,8 +56,8 @@ SVIFT.vis.base = (function (data, container) {
 
     module.containerSize.width = module.container.node().offsetWidth;
     module.containerSize.height = module.container.node().offsetHeight;
-    module.vizSize.width = module.containerSize.width - module.config.margin.right - module.config.margin.left;
-    module.vizSize.height = module.containerSize.height;
+    module.vizSize.width = module.vizInitSize.width - module.config.margin.right - module.config.margin.left;
+    module.vizSize.height = module.vizInitSize.height;
     
     module.svg = module.container.append('svg')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
@@ -196,13 +197,17 @@ SVIFT.vis.base = (function (data, container) {
 
           module.text.subtitle.attr('transform','translate(0,'+Math.round(headlineHeight+copySize*1.25)+')');
 
-          copyHeight += copySize*1.25 + (copySize * copyLineHeight)*(lines.length-1);
+          copyHeight += copySize*2 + (copySize * copyLineHeight)*(lines.length-1);
       }
 
       module.vizContainer
         .attr('transform','translate(0,'+ (copyHeight+headlineHeight) +')');
 
-      module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight;
+      if(module.scale){
+        module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight;
+      }else{
+        module.vizSize.height = module.vizInitSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight;
+      }
 
       module.resize();
   };
