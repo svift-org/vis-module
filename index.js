@@ -64,7 +64,7 @@ SVIFT.vis.base = (function (data, container) {
     module.vizSize.height = module.vizInitSize.height;
     
     module.svg = module.container.append('svg')
-    svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
+      .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
       .attr('class', module.theme+' '+module.color);
 
     module.defs = module.svg.append('defs');
