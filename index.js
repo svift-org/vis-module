@@ -55,13 +55,16 @@ SVIFT.vis.base = (function (data, container) {
 
   module.init = function () {
 
-    module.containerSize.width = module.container.node().offsetWidth;
-    module.containerSize.height = module.container.node().offsetHeight;
+    module.scale = false;
+
+    module.vizInitSize.width = module.containerSize.width = module.container.node().offsetWidth;
+    module.vizInitSize.height = module.containerSize.height = module.container.node().offsetHeight;
+
     module.vizSize.width = module.vizInitSize.width - module.config.margin.right - module.config.margin.left;
     module.vizSize.height = module.vizInitSize.height;
     
     module.svg = module.container.append('svg')
-      .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
+    svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
       .attr('class', module.theme+' '+module.color);
 
     module.defs = module.svg.append('defs');
@@ -237,7 +240,7 @@ SVIFT.vis.base = (function (data, container) {
   module.reset = function () {
     module.vizContainer.selectAll('*').remove();
     module.setup();
-    module.resize();
+    module.preResize();
   };
 
   //function that processes the data
@@ -256,7 +259,11 @@ SVIFT.vis.base = (function (data, container) {
     module.containerSize.width = module.container.node().offsetWidth;
     module.containerSize.height = module.container.node().offsetHeight;
     if(!module.scale){
-      module.svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
+      module.svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height);
+      module.vizInitSize.width = module.containerSize.width;
+      module.vizInitSize.height = module.containerSize.height;
+    }else{
+      //Just scale the svg
     }
     module.updateHead();
   };
