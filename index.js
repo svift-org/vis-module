@@ -236,10 +236,9 @@ SVIFT.vis.base = (function (data, container) {
 
   //temporary workaround to jump back to the beginning of the timeline
   module.reset = function () {
-    //module.vizContainer.selectAll('*').remove();
-    (d3.select('.viz-container')).selectAll('*').remove();
+    module.vizContainer.selectAll('*').remove();
     module.setup();
-    module.preResize();
+    //module.preResize();
   };
 
   //function that processes the data
