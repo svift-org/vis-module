@@ -236,9 +236,11 @@ SVIFT.vis.base = (function (data, container) {
 
   //temporary workaround to jump back to the beginning of the timeline
   module.reset = function () {
+    module.playState = false;
+    module.playHead = 0;
     module.vizContainer.selectAll('*').remove();
     module.setup();
-    //module.preResize();
+    module.resize();
   };
 
   //function that processes the data
