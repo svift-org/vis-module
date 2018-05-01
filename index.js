@@ -137,6 +137,8 @@ SVIFT.vis.base = (function (data, container) {
           headlineLineHeight = 1.1,
           headlineSize = headlineMax;
 
+      module.vizSize.width = module.vizInitSize.width-module.config.margin.left-module.config.margin.right;
+
       if(data.data.title.length > 0){
           var lines = data.data.title.split('\n');
 
@@ -207,17 +209,9 @@ SVIFT.vis.base = (function (data, container) {
       module.vizContainer
         .attr('transform','translate(0,'+ (copyHeight+headlineHeight) +')');
 
-      if(!module.scale){
-        module.vizSize.height = module.containerSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight -15;
-        module.vizSize.width = module.containerSize.width-module.config.margin.left-module.config.margin.right;
-        module.text.foot.attr('transform', 'translate(0,'+(module.containerSize.height-module.config.margin.bottom-module.config.margin.top)+')');
-        module.text.attribution.attr('x', module.containerSize.width-module.config.margin.left-module.config.margin.right);
-      }else{
-        module.vizSize.height = module.vizInitSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight -15;
-        module.vizSize.width = module.vizInitSize.width-module.config.margin.left-module.config.margin.right;
-        module.text.foot.attr('transform', 'translate(0,'+(module.vizInitSize.height-module.config.margin.bottom-module.config.margin.top)+')');
-        module.text.attribution.attr('x', module.vizInitSize.width-module.config.margin.left-module.config.margin.right);
-      }
+      module.vizSize.height = module.vizInitSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight -15;
+      module.text.foot.attr('transform', 'translate(0,'+(module.vizInitSize.height-module.config.margin.bottom-module.config.margin.top)+')');
+      module.text.attribution.attr('x', module.vizInitSize.width-module.config.margin.left-module.config.margin.right);
 
       module.resize();
   };
@@ -269,6 +263,7 @@ SVIFT.vis.base = (function (data, container) {
     }else{
       //Just scale the svg
     }
+
     module.updateHead();
   };
 
