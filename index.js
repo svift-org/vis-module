@@ -286,6 +286,8 @@ SVIFT.vis.base = (function (data, container) {
       }else if(t > tl.end){
         //Making sure it sits on its end position, also for the goto function
         tl.func(1);
+      }else if(t < tl.start){
+        tl.func(0);
       }
     }
   };
