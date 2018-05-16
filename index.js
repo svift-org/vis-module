@@ -189,7 +189,7 @@ SVIFT.vis.base = (function (data, container) {
                       .text(l)
                       .attr('x',0)
                       .style('font-size', localSize);
-              while(line.node().getComputedTextLength() > (module.vizSize.width) || localSize < 5){
+              while(line.node().getComputedTextLength() > (module.vizSize.width) && localSize > 5){
                   localSize--;
                   line.style('font-size', localSize);
               }
