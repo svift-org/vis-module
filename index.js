@@ -151,7 +151,7 @@ SVIFT.vis.base = (function (data, container) {
                       .attr('x',0)
                       .style('font-size', localSize);
 
-              console.log('length', module.visSize.width, line.node().getComputedTextLength());
+              console.log('length', module.vizSize.width, line.node().getComputedTextLength());
 
               while(line.node().getComputedTextLength() > module.vizSize.width && localSize > 8){
                 console.log('localSize', localSize);  
