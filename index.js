@@ -151,10 +151,7 @@ SVIFT.vis.base = (function (data, container) {
                       .attr('x',0)
                       .style('font-size', localSize);
 
-              console.log('length', module.vizSize.width, line.node().getComputedTextLength());
-
               while(line.node().getComputedTextLength() > module.vizSize.width && localSize > 8){
-                console.log('localSize', localSize);  
                 localSize--;
                 line.style('font-size', localSize);
               }
@@ -164,15 +161,13 @@ SVIFT.vis.base = (function (data, container) {
               }
           });
 
-          console.log('final', headlineSize);
-
           module.text.title.attr('transform','translate(0,'+headlineSize+')');
 
           module.text.title.selectAll('tspan')
+            .style('font-size', headlineSize)
             .attr('dy', function(d,i){
               return (i>0)?(headlineSize*headlineLineHeight):0;
-            })
-            .style('font-size', headlineSize);
+            });
 
           headlineHeight = (headlineSize*headlineLineHeight) * (lines.length - 1) + headlineSize;
       }
