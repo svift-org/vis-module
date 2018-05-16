@@ -151,7 +151,9 @@ SVIFT.vis.base = (function (data, container) {
                       .attr('x',0)
                       .style('font-size', localSize);
 
-              while(line.node().getComputedTextLength() > module.vizSize.width && localSize > 5){
+              console.log(line.node().getComputedTextLength());
+
+              while(line.node().getComputedTextLength() > module.vizSize.width && localSize > 8){
                 console.log(localSize);  
                 localSize--;
                 line.style('font-size', localSize);
@@ -161,6 +163,8 @@ SVIFT.vis.base = (function (data, container) {
                   headlineSize = localSize;
               }
           });
+
+          console.log(headlineSize);
 
           module.text.title.attr('transform','translate(0,'+headlineSize+')');
 
