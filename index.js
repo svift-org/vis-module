@@ -213,6 +213,8 @@ SVIFT.vis.base = (function (data, container) {
       module.text.foot.attr('transform', 'translate(0,'+(module.vizInitSize.height-module.config.margin.bottom-module.config.margin.top)+')');
       module.text.attribution.attr('x', module.vizInitSize.width-module.config.margin.left-module.config.margin.right);
 
+      module.updateSource();
+
       module.resize();
   };
 
