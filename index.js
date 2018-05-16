@@ -149,11 +149,11 @@ SVIFT.vis.base = (function (data, container) {
                   line = module.text.title.append('tspan')
                       .text(l)
                       .attr('x',0)
-                      .style('font-size', localSize);
+                      .style('font-size', localSize+'px');
 
               while(line.node().getComputedTextLength() > module.vizSize.width && localSize > 8){
                 localSize--;
-                line.style('font-size', localSize);
+                line.style('font-size', localSize+'px');
               }
 
               if(headlineSize>localSize){
@@ -187,10 +187,10 @@ SVIFT.vis.base = (function (data, container) {
                   line = module.text.subtitle.append('tspan')
                       .text(l)
                       .attr('x',0)
-                      .style('font-size', localSize);
+                      .style('font-size', localSize+'px');
               while(line.node().getComputedTextLength() > (module.vizSize.width) && localSize > 5){
                   localSize--;
-                  line.style('font-size', localSize);
+                  line.style('font-size', localSize+'px');
               }
               if(copySize>localSize){
                   copySize = localSize;
@@ -201,7 +201,7 @@ SVIFT.vis.base = (function (data, container) {
               .attr('dy', function(d,i){
                 return (i>0)?(copySize*copyLineHeight):0;
               })
-              .style('font-size', copySize);
+              .style('font-size', copySize+'px');
 
           module.text.subtitle.attr('transform','translate(0,'+Math.round(headlineHeight+copySize*1.55)+')');
 
