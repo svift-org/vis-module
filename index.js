@@ -163,10 +163,8 @@ SVIFT.vis.base = (function (data, container) {
 
           module.text.title.attr('transform','translate(0,'+headlineSize+')');
 
-          module.text.title.style('font-size', headlineSize);
-
           module.text.title.selectAll('tspan')
-            .style('font-size', headlineSize)
+            .style('font-size', headlineSize+'px')
             .attr('dy', function(d,i){
               return (i>0)?(headlineSize*headlineLineHeight):0;
             });
