@@ -84,7 +84,7 @@ SVIFT.vis.base = (function (data, container) {
         .attr('width', module.data.custom.logo.width)
         .attr('height', module.data.custom.logo.height)
         .attr('x', ((module.data.custom.logo.align=='left')?0:((module.data.custom.logo.align=='right')?-module.data.custom.logo.width:(-module.data.custom.logo.width/2))))
-        .attr('y', ((module.data.custom.logo.valign=='bottom')-module.data.custom.logo.height:0));
+        .attr('y', ((module.data.custom.logo.valign=='bottom')?-module.data.custom.logo.height:0));
     }
 
     //Text Top
