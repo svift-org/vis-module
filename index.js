@@ -77,7 +77,7 @@ SVIFT.vis.base = (function (data, container) {
     module.custom = module.g.append('g')
 
     if(module.data.custom){
-      module.custom.attr('transform', 'translate(' + ((module.data.custom.logo.align=='left')?module.config.margin.left:((module.data.custom.logo.align=='right')?module.config.margin.right:module.vizInitSize.width/2)) + ',' + ((module.data.custom.logo.valign=='bottom')?(module.vizInitSize.height-(module.config.margin.bottom+module.config.margin.top)):module.config.margin.top) + ')');
+      module.custom.attr('transform', 'translate(' + (((module.data.custom.logo.align=='left')?module.config.margin.left:((module.data.custom.logo.align=='right')?module.config.margin.right:module.vizInitSize.width/2))+module.data.custom.logo.x_offset) + ',' + (((module.data.custom.logo.valign=='bottom')?(module.vizInitSize.height-(module.config.margin.bottom+module.config.margin.top)):module.config.margin.top)+module.data.custom.logo.y_offset) + ')');
 
       module.custom.append('image')
         .attr('xlink:href', module.data.custom.logo.url)
