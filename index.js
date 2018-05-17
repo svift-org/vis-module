@@ -77,7 +77,7 @@ SVIFT.vis.base = (function (data, container) {
     module.custom = module.g.append('g')
 
     if(module.data.custom){
-      module.custom.attr('transform', 'translate(' + (((module.data.custom.logo.align=='left')?module.config.margin.left:((module.data.custom.logo.align=='right')?module.config.margin.right:module.vizInitSize.width/2))+module.data.custom.logo.x_offset) + ',' + (((module.data.custom.logo.valign=='bottom')?(module.vizInitSize.height-(module.config.margin.bottom+module.config.margin.top)):module.config.margin.top)+module.data.custom.logo.y_offset) + ')');
+      module.custom.attr('transform', 'translate(' + (((module.data.custom.logo.align=='left')?0:((module.data.custom.logo.align=='right')?module.vizInitSize.width-module.config.margin.left-module.config.margin.right:(module.vizInitSize.width/2-module.custom.margin.left)))+module.data.custom.logo.x_offset) + ',' + (((module.data.custom.logo.valign=='bottom')?(module.vizInitSize.height-(module.config.margin.bottom+module.config.margin.top)):module.config.margin.top)+module.data.custom.logo.y_offset) + ')');
 
       module.custom.append('image')
         .attr('xlink:href', module.data.custom.logo.url)
@@ -229,7 +229,7 @@ SVIFT.vis.base = (function (data, container) {
       module.vizSize.height = module.vizInitSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight -15;
       module.text.foot.attr('transform', 'translate(0,'+(module.vizInitSize.height-module.config.margin.bottom-module.config.margin.top)+')');
       if(module.data.custom){
-        module.custom.attr('transform', 'translate(' + (((module.data.custom.logo.align=='left')?module.config.margin.left:((module.data.custom.logo.align=='right')?module.config.margin.right:module.vizInitSize.width/2))+module.data.custom.logo.x_offset) + ',' + (((module.data.custom.logo.valign=='bottom')?(module.vizInitSize.height-(module.config.margin.bottom+module.config.margin.top)):module.config.margin.top)+module.data.custom.logo.y_offset) + ')');
+        module.custom.attr('transform', 'translate(' + (((module.data.custom.logo.align=='left')?0:((module.data.custom.logo.align=='right')?module.vizInitSize.width-module.config.margin.left-module.config.margin.right:(module.vizInitSize.width/2-module.custom.margin.left)))+module.data.custom.logo.x_offset) + ',' + (((module.data.custom.logo.valign=='bottom')?(module.vizInitSize.height-(module.config.margin.bottom+module.config.margin.top)):module.config.margin.top)+module.data.custom.logo.y_offset) + ')');
       }
       module.text.attribution.attr('x', module.vizInitSize.width-module.config.margin.left-module.config.margin.right);
 
