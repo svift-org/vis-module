@@ -24,6 +24,7 @@ SVIFT.vis.base = (function (data, container) {
   module.containerSize = {width:0,height:0};
   module.theme = data.style.theme;
   module.color = data.style.color.main;
+  module.custom = null;
 
   module.config = {
     maxWidth : 4096,
@@ -44,6 +45,7 @@ SVIFT.vis.base = (function (data, container) {
       default: "13px"
     },
     footerHeight: 40,
+    custom:false
   };
 
   module.text = {};
@@ -72,6 +74,19 @@ SVIFT.vis.base = (function (data, container) {
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
 
+    module.custom = module.g.append('g')
+
+    if(module.data.custom){
+      module.custom.attr('transform', 'translate(' + ((module.data.custom.logo.align=='left')?module.config.margin.left:((module.data.custom.logo.align=='right')?module.config.margin.right:module.vizInitSize.width/2)) + ',' + ((module.data.custom.logo.valign=='bottom')?(module.vizInitSize.height-module.config.margin.bottom):module.config.margin.top) + ')');
+
+      module.custom.append('image')
+        .attr('xlink:href', module.data.custom.logo.url)
+        .attr('width', module.data.custom.logo.width)
+        .attr('height', module.data.custom.logo.height)
+        .attr('x', ((module.data.custom.logo.align=='left')?0:((module.data.custom.logo.align=='right')?-module.data.custom.logo.width:(-module.data.custom.logo.width/2))))
+        .attr('y', ((module.data.custom.logo.valign=='bottom')-module.data.custom.logo.height:0));
+    }
+
     //Text Top
     module.text.head = module.g.append('g')
       .attr('class', 'title-wrapper');
@@ -87,12 +102,12 @@ SVIFT.vis.base = (function (data, container) {
     module.text.attribution = module.text.foot
       .append("text")
       .attr('x', module.containerSize.width-module.config.margin.left-module.config.margin.right)
-      .text(data.data.attribution)
+      .text(module.data.data.attribution)
       .attr('class', 'attribution');
 
     module.text.source = module.text.foot
       .append('text')
-      .text(data.data.source)
+      .text(module.data.data.source)
       .attr('class', 'source');
 
     //Make a Viz Container
@@ -139,8 +154,8 @@ SVIFT.vis.base = (function (data, container) {
 
       module.vizSize.width = module.vizInitSize.width-module.config.margin.left-module.config.margin.right;
 
-      if(data.data.title.length > 0){
-          var lines = data.data.title.split('\n');
+      if(module.data.data.title.length > 0){
+          var lines = module.data.data.title.split('\n');
 
           module.text.title.selectAll('tspan').remove();
 
@@ -177,8 +192,8 @@ SVIFT.vis.base = (function (data, container) {
           copyHeight = 0,
           copySize = (copyMax > headlineSize)?headlineSize*0.75:copyMax;
 
-      if(data.data.subTitle.length > 0){
-          lines = data.data.subTitle.split('\n');
+      if(module.data.data.subTitle.length > 0){
+          lines = module.data.data.subTitle.split('\n');
 
           module.text.subtitle.selectAll('tspan').remove();
 
@@ -213,6 +228,9 @@ SVIFT.vis.base = (function (data, container) {
 
       module.vizSize.height = module.vizInitSize.height-(copyHeight+headlineHeight)-module.config.margin.top-module.config.margin.bottom-module.config.footerHeight -15;
       module.text.foot.attr('transform', 'translate(0,'+(module.vizInitSize.height-module.config.margin.bottom-module.config.margin.top)+')');
+      if(module.data.custom){
+        module.custom.attr('transform', 'translate(' + ((module.data.custom.logo.align=='left')?module.config.margin.left:((module.data.custom.logo.align=='right')?module.config.margin.right:module.vizInitSize.width/2)) + ',' + ((module.data.custom.logo.valign=='bottom')?(module.vizInitSize.height-module.config.margin.bottom):module.config.margin.top) + ')');
+      }
       module.text.attribution.attr('x', module.vizInitSize.width-module.config.margin.left-module.config.margin.right);
 
       module.updateSource();
@@ -235,7 +253,7 @@ SVIFT.vis.base = (function (data, container) {
   };
 
   module.updateSource = function(){
-    module.text.source.text(data.data.source);
+    module.text.source.text(module.data.data.source);
   };
 
   //temporary workaround to jump back to the beginning of the timeline
