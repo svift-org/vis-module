@@ -11,7 +11,7 @@ SVIFT.vis.base = (function (data, container) {
 
   module.data = data;
   module.setData = function(data){
-    module.data = data;
+    module.data.data = data;
   };
 
   module.container = container;
