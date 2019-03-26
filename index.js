@@ -67,13 +67,14 @@ SVIFT.vis.base = (function (data, container) {
     module.vizSize.height = module.vizInitSize.height;
     
     module.svg = module.container.append('svg')
+      .style('background-color', '#ffffff')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
       .attr('class', module.theme+' '+module.color);
     
+    module.defs = module.svg.append('defs');
+
     module.bg = module.svg.append('rect')
       .style('fill', '#fff');
-
-    module.defs = module.svg.append('defs');
 
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
