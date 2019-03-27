@@ -327,10 +327,10 @@ SVIFT.vis.base = (function (data, container) {
   module.playState = false;
   module.playTime = 0;
   module.time = {
-    fps : 30,
+    fps : 60,
     step: 0,
     elapsed : 0,
-    fpsInterval : 1000 / 30, //30 fps
+    fpsInterval : 1000 / 60, //60 fps
     then : 0,
     startTime : 0,
     now : 0
