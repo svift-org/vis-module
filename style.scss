@@ -43,6 +43,12 @@ svg{
 	&.big{
 		font-size:2em;
 	}
+	&.white{
+		fill:#fff;
+	}
+	&.black{
+		fill:#000;
+	}
 }
 
 .labelTextFont{
