@@ -250,8 +250,9 @@ SVIFT.vis.base = (function (data, container) {
     module.updateHead();
   };
 
-  module.hideLabelText = function(theme){
-    d3.selectAll('.labelText').style('display','none');
+  module.hideLabelText = function(hide){
+    module.svg.classed('hideLabelText', hide);
+    module.updateHead();
   };
 
   module.setColor = function(color){
