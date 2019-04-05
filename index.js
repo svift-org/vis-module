@@ -23,7 +23,7 @@ SVIFT.vis.base = (function (data, container) {
   module.vizInitSize = {width:500,height:500};
   module.containerSize = {width:0,height:0};
   module.theme = data.style.theme;
-  module.labelTextHidden = 'hideLabelText';
+  module.labelTextHidden = '';
   module.color = data.style.color.main;
   module.custom = null;
   module.bg = null;
@@ -252,8 +252,8 @@ SVIFT.vis.base = (function (data, container) {
   };
 
   module.toogleLabelText = function(hide){
-    module.svg.classed('hideLabelText', hide);
     module.labelTextHidden = hide ? 'hideLabelText' : '';
+    module.svg.classed('hideLabelText', hide);
     module.updateHead();
   };
 
