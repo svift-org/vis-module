@@ -23,6 +23,7 @@ SVIFT.vis.base = (function (data, container) {
   module.vizInitSize = {width:500,height:500};
   module.containerSize = {width:0,height:0};
   module.theme = data.style.theme;
+  module.labelTextHidden = 'hideLabelText';
   module.color = data.style.color.main;
   module.custom = null;
   module.bg = null;
@@ -69,7 +70,7 @@ SVIFT.vis.base = (function (data, container) {
     module.svg = module.container.append('svg')
       .style('background-color', '#ffffff')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
-      .attr('class', module.theme+' '+module.color);
+      .attr('class', module.theme+' '+module.color+' '+ module.labelTextHidden);
     
     module.defs = module.svg.append('defs');
 
@@ -250,8 +251,9 @@ SVIFT.vis.base = (function (data, container) {
     module.updateHead();
   };
 
-  module.hideLabelText = function(hide){
+  module.toogleLabelText = function(hide){
     module.svg.classed('hideLabelText', hide);
+    module.labelTextHidden = hide ? 'hideLabelText' : '';
     module.updateHead();
   };
 
