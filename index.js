@@ -77,7 +77,7 @@ SVIFT.vis.base = (function (data, container) {
     module.defs = module.svg.append('defs');
 
     module.bg = module.svg.append('rect')
-      .style('fill', '#fff');
+      .style('fill', '#fff')
       .style('border', '2px solid #fff');
 
     module.g = module.svg.append('g')
