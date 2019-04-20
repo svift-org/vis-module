@@ -295,11 +295,13 @@ SVIFT.vis.base = (function (data, container) {
   module.preResize = function() {
     module.containerSize.width = module.container.node().offsetWidth;
     module.containerSize.height = module.container.node().offsetHeight;
-    module.bg
-      .attr('x', -2)
-      .attr('y', -2)
-      .attr('width', module.containerSize.width + 4)
-      .attr('height', module.containerSize.height + 4);
+    if(module.containerSize.width > 0 && module.containerSize.height > 0){
+      module.bg
+        .attr('x', -2)
+        .attr('y', -2)
+        .attr('width', module.containerSize.width + 4)
+        .attr('height', module.containerSize.height + 4);
+    }
 
     if(!module.scale){
       module.svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height);
