@@ -69,6 +69,7 @@ SVIFT.vis.base = (function (data, container) {
     
     module.svg = module.container.append('svg')
       .style('background-color', '#ffffff')
+      .style('border', '2px solid #ffffff')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
       // .attr('class', module.theme+' '+module.color+' '+ module.labelTextHidden);
       .attr('class', module.theme+' '+module.color);
@@ -77,6 +78,7 @@ SVIFT.vis.base = (function (data, container) {
 
     module.bg = module.svg.append('rect')
       .style('fill', '#fff');
+      .style('border', '2px solid #fff');
 
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
@@ -294,8 +296,10 @@ SVIFT.vis.base = (function (data, container) {
     module.containerSize.width = module.container.node().offsetWidth;
     module.containerSize.height = module.container.node().offsetHeight;
     module.bg
-      .attr('width', module.containerSize.width)
-      .attr('height', module.containerSize.height);
+      .attr('x', -2)
+      .attr('y', -2)
+      .attr('width', module.containerSize.width + 4)
+      .attr('height', module.containerSize.height + 4);
 
     if(!module.scale){
       module.svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height);
