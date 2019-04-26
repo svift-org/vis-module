@@ -28,8 +28,6 @@ SVIFT.vis.base = (function (data, container) {
   module.custom = null;
   module.bg = null;
 
-  console.log(data)
-
   module.config = {
     maxWidth : 4096,
     maxHeight : 4096,
@@ -71,9 +69,8 @@ SVIFT.vis.base = (function (data, container) {
     
     module.svg = module.container.append('svg')
       .style('background-color', '#ffffff')
-      .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height + " " + data.hideNumberLables ? "numberLableHidden" : "")
-      // .attr('class', module.theme+' '+module.color+' '+ module.labelTextHidden);
-      .attr('class', module.theme+' '+module.color);
+      .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
+      .attr('class', module.theme + ' ' + module.color + ' ' + data.hideNumberLables ? "numberLableHidden" : "");
 
     module.defs = module.svg.append('defs');
 
