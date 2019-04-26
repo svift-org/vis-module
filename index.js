@@ -71,8 +71,8 @@ SVIFT.vis.base = (function (data, container) {
       .style('background-color', '#ffffff')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
       // .attr('class', module.theme+' '+module.color+' '+ module.labelTextHidden);
-      // .attr('class', module.theme + " " + module.color + " " + data.hideNumberLables ? "numberLableHidden" : "")
-      .attr('class', module.theme+' '+module.color);
+      .attr('class', module.theme + " " + module.color + " " + data.hideNumberLables ? "numberLableHidden" : "")
+      // .attr('class', module.theme+' '+module.color);
 
     module.defs = module.svg.append('defs');
 
