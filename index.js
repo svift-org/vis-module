@@ -66,11 +66,10 @@ SVIFT.vis.base = (function (data, container) {
     module.vizSize.width = module.vizInitSize.width - module.config.margin.right - module.config.margin.left;
     module.vizSize.height = module.vizInitSize.height;
 
-    console.log(module.data)
     module.svg = module.container.append('svg')
       .style('background-color', '#ffffff')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
-      .attr('class', module.theme + " " + module.color + " " + (module.data.data.hideNumberLabels ? "nLabelHidden" : "") );
+      .attr('class', module.theme + " " + module.color);
 
 
     module.defs = module.svg.append('defs');
