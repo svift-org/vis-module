@@ -28,6 +28,8 @@ SVIFT.vis.base = (function (data, container) {
   module.custom = null;
   module.bg = null;
 
+  console.log("module",module,"data",data)
+
   module.config = {
     maxWidth : 4096,
     maxHeight : 4096,
