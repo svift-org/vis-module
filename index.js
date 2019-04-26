@@ -23,10 +23,12 @@ SVIFT.vis.base = (function (data, container) {
   module.vizInitSize = {width:500,height:500};
   module.containerSize = {width:0,height:0};
   module.theme = data.style.theme;
-  module.numberLableClass = "";
+  // module.labelTextHidden = '';
   module.color = data.style.color.main;
   module.custom = null;
   module.bg = null;
+
+  console.log(data)
 
   module.config = {
     maxWidth : 4096,
@@ -69,16 +71,14 @@ SVIFT.vis.base = (function (data, container) {
     
     module.svg = module.container.append('svg')
       .style('background-color', '#ffffff')
-      .style('border', '2px solid #ffffff')
       .attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height)
       // .attr('class', module.theme+' '+module.color+' '+ module.labelTextHidden);
-      .attr('class', module.theme+' '+module.color+' '+module.numberLableClass);
+      .attr('class', module.theme+' '+module.color);
 
     module.defs = module.svg.append('defs');
 
     module.bg = module.svg.append('rect')
-      .style('fill', '#fff')
-      .style('border', '2px solid #fff');
+      .style('fill', '#fff');
 
     module.g = module.svg.append('g')
       .attr('transform','translate('+module.config.margin.top+','+module.config.margin.left+')');
@@ -254,12 +254,6 @@ SVIFT.vis.base = (function (data, container) {
     module.updateHead();
   };
 
-  module.hideLabelText = function(hide){
-    module.numberLableClass = hide ? 'numberLableHidden' : '';
-    module.svg.classed(module.numberLableClass, true);
-    module.updateHead();
-  };
-
   module.setColor = function(color){
     module.svg.classed(module.color, false);
     module.color = color;
@@ -295,13 +289,9 @@ SVIFT.vis.base = (function (data, container) {
   module.preResize = function() {
     module.containerSize.width = module.container.node().offsetWidth;
     module.containerSize.height = module.container.node().offsetHeight;
-    if(module.containerSize.width > 0 && module.containerSize.height > 0){
-      module.bg
-        .attr('x', -2)
-        .attr('y', -2)
-        .attr('width', module.containerSize.width + 4)
-        .attr('height', module.containerSize.height + 4);
-    }
+    module.bg
+      .attr('width', module.containerSize.width)
+      .attr('height', module.containerSize.height);
 
     if(!module.scale){
       module.svg.attr("viewBox", "0 0 " + module.containerSize.width + " " + module.containerSize.height);
