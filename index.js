@@ -23,12 +23,10 @@ SVIFT.vis.base = (function (data, container) {
   module.vizInitSize = {width:500,height:500};
   module.containerSize = {width:0,height:0};
   module.theme = data.style.theme;
-  module.hideNumberLablesClass = data.hideNumberLables ? "numberLableHidden" : "";
+  module.hideNumberLablesClass = data.data.hideNumberLables ? "numberLableHidden" : "";
   module.color = data.style.color.main;
   module.custom = null;
   module.bg = null;
-
-  console.log("module",module,"data",data)
 
   module.config = {
     maxWidth : 4096,
